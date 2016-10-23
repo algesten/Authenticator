@@ -19,6 +19,11 @@
 		5BA42BB21DBD11CF00A42213 /* WatchTokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */; };
 		5BA42BB41DBD135D00A42213 /* Base32.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C944A5581A7ECB3100E08B1E /* Base32.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5BA42BB61DBD135D00A42213 /* OneTimePassword.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C944A5561A7ECB0800E08B1E /* OneTimePassword.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5BA42BBA1DBD4DC500A42213 /* WatchTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BB91DBD4DC500A42213 /* WatchTokenStore.swift */; };
+		5BA42BBC1DBD5AF300A42213 /* WatchRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BBB1DBD5AF300A42213 /* WatchRoot.swift */; };
+		5BA42BBF1DBD5BF400A42213 /* WatchRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BBE1DBD5BF400A42213 /* WatchRootViewModel.swift */; };
+		5BA42BC21DBD5D4700A42213 /* WatchTokenListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BC11DBD5D4700A42213 /* WatchTokenListViewModel.swift */; };
+		5BA42BC41DBD674200A42213 /* WatchAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BC31DBD674200A42213 /* WatchAppController.swift */; };
 		8B0028B511EB75920092DE18 /* ScannerOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0028B411EB75920092DE18 /* ScannerOverlayView.swift */; };
 		C910ADC11BF0315A00C988F5 /* TokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C910ADC01BF0315A00C988F5 /* TokenList.swift */; };
 		C92708AC19CFB0750033128B /* TokenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92708AB19CFB0750033128B /* TokenListViewController.swift */; };
@@ -150,6 +155,11 @@
 		5B39F4E51DBD100D00CD2DAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B39F4E71DBD100D00CD2DAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenList.swift; sourceTree = "<group>"; };
+		5BA42BB91DBD4DC500A42213 /* WatchTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenStore.swift; sourceTree = "<group>"; };
+		5BA42BBB1DBD5AF300A42213 /* WatchRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchRoot.swift; sourceTree = "<group>"; };
+		5BA42BBE1DBD5BF400A42213 /* WatchRootViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchRootViewModel.swift; sourceTree = "<group>"; };
+		5BA42BC11DBD5D4700A42213 /* WatchTokenListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenListViewModel.swift; sourceTree = "<group>"; };
+		5BA42BC31DBD674200A42213 /* WatchAppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchAppController.swift; sourceTree = "<group>"; };
 		8B0028B411EB75920092DE18 /* ScannerOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerOverlayView.swift; sourceTree = "<group>"; };
 		8B2B8AE1118BA49F00437315 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		8BF5147F118799AE005C936F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -326,11 +336,14 @@
 		5B39F4E01DBD100D00CD2DAB /* AuthenticatorWatch Ext */ = {
 			isa = PBXGroup;
 			children = (
-				5B39F4E11DBD100D00CD2DAB /* InterfaceController.swift */,
-				5B39F4E31DBD100D00CD2DAB /* ExtensionDelegate.swift */,
-				5BA42BB01DBD11A500A42213 /* Token List */,
 				5B39F4E51DBD100D00CD2DAB /* Assets.xcassets */,
+				5BA42BB81DBD4D0C00A42213 /* Data Store */,
+				5B39F4E31DBD100D00CD2DAB /* ExtensionDelegate.swift */,
 				5B39F4E71DBD100D00CD2DAB /* Info.plist */,
+				5B39F4E11DBD100D00CD2DAB /* InterfaceController.swift */,
+				5BA42BBD1DBD5B0200A42213 /* Root Component */,
+				5BA42BB01DBD11A500A42213 /* Token List */,
+				5BA42BC31DBD674200A42213 /* WatchAppController.swift */,
 			);
 			name = "AuthenticatorWatch Ext";
 			path = "AuthenticatorWatch Extension";
@@ -340,8 +353,26 @@
 			isa = PBXGroup;
 			children = (
 				5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */,
+				5BA42BC11DBD5D4700A42213 /* WatchTokenListViewModel.swift */,
 			);
 			name = "Token List";
+			sourceTree = "<group>";
+		};
+		5BA42BB81DBD4D0C00A42213 /* Data Store */ = {
+			isa = PBXGroup;
+			children = (
+				5BA42BB91DBD4DC500A42213 /* WatchTokenStore.swift */,
+			);
+			name = "Data Store";
+			sourceTree = "<group>";
+		};
+		5BA42BBD1DBD5B0200A42213 /* Root Component */ = {
+			isa = PBXGroup;
+			children = (
+				5BA42BBB1DBD5AF300A42213 /* WatchRoot.swift */,
+				5BA42BBE1DBD5BF400A42213 /* WatchRootViewModel.swift */,
+			);
+			name = "Root Component";
 			sourceTree = "<group>";
 		};
 		C931A5FB1BFF6F3A00706A1C /* Tools */ = {
@@ -780,6 +811,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BA42BC21DBD5D4700A42213 /* WatchTokenListViewModel.swift in Sources */,
+				5BA42BBA1DBD4DC500A42213 /* WatchTokenStore.swift in Sources */,
+				5BA42BBF1DBD5BF400A42213 /* WatchRootViewModel.swift in Sources */,
+				5BA42BBC1DBD5AF300A42213 /* WatchRoot.swift in Sources */,
+				5BA42BC41DBD674200A42213 /* WatchAppController.swift in Sources */,
 				5B39F4E41DBD100D00CD2DAB /* ExtensionDelegate.swift in Sources */,
 				5BA42BAF1DBD117900A42213 /* Component.swift in Sources */,
 				5B39F4E21DBD100D00CD2DAB /* InterfaceController.swift in Sources */,

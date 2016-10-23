@@ -26,16 +26,35 @@
 import Foundation
 import OneTimePassword
 
-let factor = OneTimePassword.Generator.Factor.Counter(111)
-let secret = "12345678901234567890".dataUsingEncoding(NSASCIIStringEncoding)!
-let algorithm = Generator.Algorithm.SHA256
-let digits = 8
+struct WatchTokenList : Component {
+    
+    var persistentTokens:[PersistentToken]
+    
+    init(persistentTokens: [PersistentToken]) {
+        self.persistentTokens = persistentTokens
+    }
+    
+    var viewModel: WatchTokenListViewModel {
+//        let rowModels = filteredTokens.map({
+//            TokenRowModel(persistentToken: $0, displayTime: displayTime, canReorder: !isFiltering)
+//        })
+        // XXX populate list
+        return WatchTokenListViewModel()
+    }
+    
+    enum Action {
+        
+    }
+    enum Effect {
+        
+    }
+    
+    @warn_unused_result
+    mutating func update(action: Action) -> Effect? {
+        return nil
+    }
+    
+}
 
-let generator = Generator(
-    factor: factor,
-    secret: secret,
-    algorithm: algorithm,
-    digits: digits
-)
-let token = Token(name: "test", issuer: "test", generator: generator!)
+
 
