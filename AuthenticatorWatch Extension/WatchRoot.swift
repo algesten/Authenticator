@@ -15,14 +15,14 @@ struct WatchRoot : Component {
  
     private enum WatchModal {
         case None
-        case EntryView
+        case EntryView(WatchEntry)
         
         var viewModel: WatchRootViewModel.ModalViewModel {
             switch self {
             case .None:
                 return .None
-            case .EntryView:
-                return .EntryView
+            case .EntryView(let component):
+                return .EntryView(component.viewModel)
             }
         }
     }

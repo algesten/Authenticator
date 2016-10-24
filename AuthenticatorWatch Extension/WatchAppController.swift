@@ -12,7 +12,17 @@ import OneTimePassword
 
 class WatchAppController {
     private let store: TokenStore
-    private var component: WatchRoot
+    private var component: WatchRoot {
+        didSet {
+            view.updateWithViewModel(component.viewModel)
+        }
+    }
+    private lazy var view: WatchRootViewController = {
+        return WatchRootViewController(
+            viewModel: self.component.viewModel,
+            dispatchAction: self.handleAction
+        )
+    }()
     
     init() {
         do {

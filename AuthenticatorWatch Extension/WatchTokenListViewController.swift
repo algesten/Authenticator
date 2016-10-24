@@ -26,12 +26,19 @@
 import WatchKit
 import Foundation
 
+// this is the root view controller
+class WatchTokenListViewController: WKInterfaceController {
 
-class InterfaceController: WKInterfaceController {
+    // singleton
+    static var instance:WatchTokenListViewController!
+
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        // Configure interface objects here.
+
+        // assign singleton
+        WatchTokenListViewController.instance = self
+        
     }
     
     override func willActivate() {
@@ -44,4 +51,12 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
 
+}
+
+
+// MARK: - Presenter
+
+extension WatchTokenListViewController {
+    func updateWithViewModel(viewModel: WatchTokenList.ViewModel) {
+    }
 }

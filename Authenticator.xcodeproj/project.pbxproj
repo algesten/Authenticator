@@ -11,11 +11,15 @@
 		5B39F4D41DBD100D00CD2DAB /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B39F4D21DBD100D00CD2DAB /* Interface.storyboard */; };
 		5B39F4D61DBD100D00CD2DAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B39F4D51DBD100D00CD2DAB /* Assets.xcassets */; };
 		5B39F4DD1DBD100D00CD2DAB /* AuthenticatorWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5B39F4DC1DBD100D00CD2DAB /* AuthenticatorWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5B39F4E21DBD100D00CD2DAB /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39F4E11DBD100D00CD2DAB /* InterfaceController.swift */; };
+		5B39F4E21DBD100D00CD2DAB /* WatchTokenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39F4E11DBD100D00CD2DAB /* WatchTokenListViewController.swift */; };
 		5B39F4E41DBD100D00CD2DAB /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39F4E31DBD100D00CD2DAB /* ExtensionDelegate.swift */; };
 		5B39F4E61DBD100D00CD2DAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B39F4E51DBD100D00CD2DAB /* Assets.xcassets */; };
 		5B39F4EA1DBD100D00CD2DAB /* AuthenticatorWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5B39F4D01DBD100D00CD2DAB /* AuthenticatorWatch.app */; };
 		5B4344451DBE6CA600D31302 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7A8601C4D90B50082E5AE /* TokenStore.swift */; };
+		5B4344491DBE925100D31302 /* WatchRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4344481DBE925100D31302 /* WatchRootViewController.swift */; };
+		5B43444C1DBE94FE00D31302 /* WatchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43444B1DBE94FE00D31302 /* WatchEntry.swift */; };
+		5B43444E1DBE956600D31302 /* WatchEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43444D1DBE956600D31302 /* WatchEntryViewModel.swift */; };
+		5B4344501DBE95CA00D31302 /* WatchEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43444F1DBE95CA00D31302 /* WatchEntryViewController.swift */; };
 		5BA42BAF1DBD117900A42213 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EB448D1C52A74200ACFA87 /* Component.swift */; };
 		5BA42BB21DBD11CF00A42213 /* WatchTokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */; };
 		5BA42BB41DBD135D00A42213 /* Base32.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C944A5581A7ECB3100E08B1E /* Base32.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -151,10 +155,14 @@
 		5B39F4D51DBD100D00CD2DAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B39F4D71DBD100D00CD2DAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B39F4DC1DBD100D00CD2DAB /* AuthenticatorWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AuthenticatorWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B39F4E11DBD100D00CD2DAB /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		5B39F4E11DBD100D00CD2DAB /* WatchTokenListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTokenListViewController.swift; sourceTree = "<group>"; };
 		5B39F4E31DBD100D00CD2DAB /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		5B39F4E51DBD100D00CD2DAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B39F4E71DBD100D00CD2DAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B4344481DBE925100D31302 /* WatchRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchRootViewController.swift; sourceTree = "<group>"; };
+		5B43444B1DBE94FE00D31302 /* WatchEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntry.swift; sourceTree = "<group>"; };
+		5B43444D1DBE956600D31302 /* WatchEntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntryViewModel.swift; sourceTree = "<group>"; };
+		5B43444F1DBE95CA00D31302 /* WatchEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntryViewController.swift; sourceTree = "<group>"; };
 		5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenList.swift; sourceTree = "<group>"; };
 		5BA42BB91DBD4DC500A42213 /* WatchTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenStore.swift; sourceTree = "<group>"; };
 		5BA42BBB1DBD5AF300A42213 /* WatchRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchRoot.swift; sourceTree = "<group>"; };
@@ -337,17 +345,43 @@
 		5B39F4E01DBD100D00CD2DAB /* AuthenticatorWatch Ext */ = {
 			isa = PBXGroup;
 			children = (
-				5B39F4E51DBD100D00CD2DAB /* Assets.xcassets */,
-				5BA42BB81DBD4D0C00A42213 /* Data Store */,
-				5B39F4E31DBD100D00CD2DAB /* ExtensionDelegate.swift */,
-				5B39F4E71DBD100D00CD2DAB /* Info.plist */,
-				5B39F4E11DBD100D00CD2DAB /* InterfaceController.swift */,
-				5BA42BBD1DBD5B0200A42213 /* Root Component */,
-				5BA42BB01DBD11A500A42213 /* Token List */,
-				5BA42BC31DBD674200A42213 /* WatchAppController.swift */,
+				5B4344471DBE8F9200D31302 /* Source */,
+				5B4344461DBE8F8900D31302 /* Resources */,
 			);
 			name = "AuthenticatorWatch Ext";
 			path = "AuthenticatorWatch Extension";
+			sourceTree = "<group>";
+		};
+		5B4344461DBE8F8900D31302 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B39F4E51DBD100D00CD2DAB /* Assets.xcassets */,
+				5B39F4E71DBD100D00CD2DAB /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		5B4344471DBE8F9200D31302 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5B39F4E31DBD100D00CD2DAB /* ExtensionDelegate.swift */,
+				5BA42BC31DBD674200A42213 /* WatchAppController.swift */,
+				5BA42BB81DBD4D0C00A42213 /* Data Store */,
+				5BA42BBD1DBD5B0200A42213 /* Root Component */,
+				5BA42BB01DBD11A500A42213 /* Token List */,
+				5B43444A1DBE94AA00D31302 /* Entry View */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		5B43444A1DBE94AA00D31302 /* Entry View */ = {
+			isa = PBXGroup;
+			children = (
+				5B43444B1DBE94FE00D31302 /* WatchEntry.swift */,
+				5B43444D1DBE956600D31302 /* WatchEntryViewModel.swift */,
+				5B43444F1DBE95CA00D31302 /* WatchEntryViewController.swift */,
+			);
+			name = "Entry View";
 			sourceTree = "<group>";
 		};
 		5BA42BB01DBD11A500A42213 /* Token List */ = {
@@ -355,6 +389,7 @@
 			children = (
 				5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */,
 				5BA42BC11DBD5D4700A42213 /* WatchTokenListViewModel.swift */,
+				5B39F4E11DBD100D00CD2DAB /* WatchTokenListViewController.swift */,
 			);
 			name = "Token List";
 			sourceTree = "<group>";
@@ -372,6 +407,7 @@
 			children = (
 				5BA42BBB1DBD5AF300A42213 /* WatchRoot.swift */,
 				5BA42BBE1DBD5BF400A42213 /* WatchRootViewModel.swift */,
+				5B4344481DBE925100D31302 /* WatchRootViewController.swift */,
 			);
 			name = "Root Component";
 			sourceTree = "<group>";
@@ -816,12 +852,16 @@
 				5BA42BBA1DBD4DC500A42213 /* WatchTokenStore.swift in Sources */,
 				5BA42BBF1DBD5BF400A42213 /* WatchRootViewModel.swift in Sources */,
 				5BA42BBC1DBD5AF300A42213 /* WatchRoot.swift in Sources */,
+				5B43444E1DBE956600D31302 /* WatchEntryViewModel.swift in Sources */,
 				5BA42BC41DBD674200A42213 /* WatchAppController.swift in Sources */,
 				5B4344451DBE6CA600D31302 /* TokenStore.swift in Sources */,
 				5B39F4E41DBD100D00CD2DAB /* ExtensionDelegate.swift in Sources */,
+				5B4344491DBE925100D31302 /* WatchRootViewController.swift in Sources */,
+				5B4344501DBE95CA00D31302 /* WatchEntryViewController.swift in Sources */,
 				5BA42BAF1DBD117900A42213 /* Component.swift in Sources */,
-				5B39F4E21DBD100D00CD2DAB /* InterfaceController.swift in Sources */,
+				5B39F4E21DBD100D00CD2DAB /* WatchTokenListViewController.swift in Sources */,
 				5BA42BB21DBD11CF00A42213 /* WatchTokenList.swift in Sources */,
+				5B43444C1DBE94FE00D31302 /* WatchEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11077"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--Watch Token List View Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="AuthenticatorWatch" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="WatchTokenListViewController" customModule="AuthenticatorWatch_Extension"/>
             </objects>
         </scene>
     </scenes>

@@ -27,6 +27,8 @@ import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
+    let app = WatchAppController()
+    
     func applicationDidFinishLaunching() {
     }
 

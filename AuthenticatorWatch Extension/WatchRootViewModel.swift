@@ -14,6 +14,6 @@ struct WatchRootViewModel {
     
     enum ModalViewModel {
         case None
-        case EntryView
+        case EntryView(WatchEntryViewModel)
     }
 }
