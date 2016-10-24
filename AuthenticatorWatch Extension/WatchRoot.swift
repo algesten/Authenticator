@@ -55,12 +55,12 @@ extension WatchRoot {
         case TokenListAction(WatchTokenList.Action)
 
         case RequestTokens
-        case ReceivePersistentTokens([PersistentToken])
+        case ReceiveTokens([Token])
     }
     
     enum Effect {
         case RequestTokens
-        case UpdatePersistentTokens([PersistentToken],
+        case UpdateTokens([Token],
             success: ([PersistentToken]) -> Action,
             failure: (ErrorType) -> Action)
     }
@@ -72,8 +72,8 @@ extension WatchRoot {
             return handleTokenListAction(action)
         case .RequestTokens():
             return handleRequestTokens()
-        case .ReceivePersistentTokens(let tokens):
-            return handlePersistentTokens(tokens)
+        case .ReceiveTokens(let tokens):
+            return handleTokens(tokens)
         }
     }
     
@@ -91,7 +91,7 @@ extension WatchRoot {
         return nil
     }
     
-    private mutating func handlePersistentTokens(tokens:[PersistentToken]) -> Effect? {
+    private mutating func handleTokens(tokens:[Token]) -> Effect? {
         return nil
     }
         

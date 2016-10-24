@@ -10,37 +10,31 @@ import Foundation
 import OneTimePassword
 import WatchConnectivity
 
-let kRequestTokensMessage = "OTPRequestTokensMessage"
-let kPersistentTokensMessage = "OTPPersistentTokensMessage"
+private let kRequestTokensMessage = "OTPRequestTokensMessage"
+private let kPersistentTokensMessage = "OTPPersistentTokensMessage"
 
-class WatchTokenStore : NSObject {
+extension TokenStore {
     
-    private let userDefaults: NSUserDefaults
-    private(set) var persistentTokens: [PersistentToken]
-    
-    // Throws an error if the initial state could not be loaded from the keychain.
-    init(userDefaults: NSUserDefaults) {
-        self.userDefaults = userDefaults
-        self.persistentTokens = userDefaults.allPersistentTokens()
-    }
-    
-    func savePersistentTokens(tokens:[PersistentToken]) throws {
-        try self.userDefaults.savePersistentTokens(tokens)
-    }
-    
+    // watch app request tokens to be pushed from the
+    // phone. done when we launch the app.
     func requestTokens() {
         simpleSend(kRequestTokensMessage)
     }
     
+    // invoked when we receive tokens from the phone, 
+    // both when we've requested it and when they are 
+    // automatically pushed.
     func receivePersistentTokensMessage(data:NSData) {
         
     }
-
+    
 }
+
+
 
 // MARK: - WatchConnectivity functions
 
-extension WatchTokenStore : WCSessionDelegate {
+extension TokenStore : WCSessionDelegate {
     
     private var session:WCSession? {
         guard WCSession.isSupported() else {
@@ -53,7 +47,10 @@ extension WatchTokenStore : WCSessionDelegate {
     }
 
     func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
-        // great
+        // great, it's not overly interesting to
+        // see whether we fail to connect since not connecting
+        // is a "natural state" where the watch simply is
+        // far away from the phone.
     }
     
     // validation free simple send and forget
@@ -76,43 +73,4 @@ extension WatchTokenStore : WCSessionDelegate {
         }
     }
 
-}
-
-
-// MARK: - Token UserDefaultsPersistence
-
-private let kPersistentTokensArray = "OTPPersistentTokensArray"
-
-private extension NSUserDefaults {
-    
-    
-    func savePersistentTokens(tokens:[PersistentToken]) throws {
-        // turn into array of [NSData,String] pairs for each token
-        let arr:NSArray = try tokens.map() {
-            return [$0.identifier, try $0.token.toURL()]
-        }
-        setObject(arr, forKey: kPersistentTokensArray)
-    }
-    
-    
-    func allPersistentTokens() -> [PersistentToken] {
-        guard let arr = arrayForKey(kPersistentTokensArray) else {
-            // if we have no stored data return empty array
-            return []
-        }
-        return arr.map({
-            let pair = $0 as! [AnyObject]
-            let identifier = pair[0] as! NSData
-            let urlStr = pair[1] as! String
-            guard let url = NSURL(string: urlStr) else {
-                return nil  // broken string representation?
-            }
-            guard let token = Token(url: url) else {
-                return nil  // broken url?
-            }
-            return PersistentToken(token: token, identifier: identifier)
-        }).flatMap() { $0 } // filter nil
-    }
-    
-    
 }

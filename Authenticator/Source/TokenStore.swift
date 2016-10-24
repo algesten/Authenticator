@@ -26,7 +26,7 @@
 import Foundation
 import OneTimePassword
 
-class TokenStore {
+class TokenStore : NSObject {
     private let keychain: Keychain
     private let userDefaults: NSUserDefaults
     private(set) var persistentTokens: [PersistentToken]
@@ -51,7 +51,10 @@ class TokenStore {
                 return false
             }
         })
-
+        
+        // NSObject init
+        super.init()
+        
         if persistentTokens.count > sortedIdentifiers.count {
             // If lost tokens were found and appended, save the full list of tokens
             saveTokenOrder()
@@ -70,6 +73,11 @@ extension TokenStore {
     func addToken(token: Token) throws {
         let newPersistentToken = try keychain.addToken(token)
         persistentTokens.append(newPersistentToken)
+        saveTokenOrder()
+    }
+    
+    func resetTokens(tokens:[Token]) throws {
+        try keychain.resetTokens(tokens)
         saveTokenOrder()
     }
 

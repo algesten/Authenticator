@@ -11,13 +11,19 @@ import UIKit
 import OneTimePassword
 
 class WatchAppController {
-    private let store: WatchTokenStore
+    private let store: TokenStore
     private var component: WatchRoot
     
     init() {
-        store = WatchTokenStore(
-            userDefaults: NSUserDefaults.standardUserDefaults()
-        )
+        do {
+            try store = TokenStore(
+                keychain: Keychain.sharedInstance,
+                userDefaults: NSUserDefaults.standardUserDefaults()
+            )
+        } catch {
+            // If the TokenStore could not be created, the watch app is unusable.
+            fatalError("Failed to load token store: \(error)")
+        }
         component = WatchRoot(persistentTokens: store.persistentTokens)
     }
     
@@ -32,9 +38,9 @@ class WatchAppController {
         switch effect {
         case .RequestTokens():
             store.requestTokens()
-        case let .UpdatePersistentTokens(tokens, success, failure):
+        case let .UpdateTokens(tokens, success, failure):
             do {
-                try store.savePersistentTokens(tokens)
+                try store.resetTokens(tokens)
                 handleAction(success(store.persistentTokens))
             } catch {
                 handleAction(failure(error))

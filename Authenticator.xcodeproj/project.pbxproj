@@ -15,6 +15,7 @@
 		5B39F4E41DBD100D00CD2DAB /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B39F4E31DBD100D00CD2DAB /* ExtensionDelegate.swift */; };
 		5B39F4E61DBD100D00CD2DAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B39F4E51DBD100D00CD2DAB /* Assets.xcassets */; };
 		5B39F4EA1DBD100D00CD2DAB /* AuthenticatorWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5B39F4D01DBD100D00CD2DAB /* AuthenticatorWatch.app */; };
+		5B4344451DBE6CA600D31302 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7A8601C4D90B50082E5AE /* TokenStore.swift */; };
 		5BA42BAF1DBD117900A42213 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EB448D1C52A74200ACFA87 /* Component.swift */; };
 		5BA42BB21DBD11CF00A42213 /* WatchTokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */; };
 		5BA42BB41DBD135D00A42213 /* Base32.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C944A5581A7ECB3100E08B1E /* Base32.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -816,6 +817,7 @@
 				5BA42BBF1DBD5BF400A42213 /* WatchRootViewModel.swift in Sources */,
 				5BA42BBC1DBD5AF300A42213 /* WatchRoot.swift in Sources */,
 				5BA42BC41DBD674200A42213 /* WatchAppController.swift in Sources */,
+				5B4344451DBE6CA600D31302 /* TokenStore.swift in Sources */,
 				5B39F4E41DBD100D00CD2DAB /* ExtensionDelegate.swift in Sources */,
 				5BA42BAF1DBD117900A42213 /* Component.swift in Sources */,
 				5B39F4E21DBD100D00CD2DAB /* InterfaceController.swift in Sources */,
