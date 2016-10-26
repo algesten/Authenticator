@@ -371,7 +371,7 @@
 				5BA42BB01DBD11A500A42213 /* Token List */,
 				5B43444A1DBE94AA00D31302 /* Entry View */,
 			);
-			name = Source;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		5B43444A1DBE94AA00D31302 /* Entry View */ = {
