@@ -1,6 +1,6 @@
 //
-//  InterfaceController.swift
-//  AuthenticatorWatch Extension
+//  WatchTokenListController.swift
+//  Authenticato
 //
 //  Copyright (c) 2013-2016 Authenticator authors
 //

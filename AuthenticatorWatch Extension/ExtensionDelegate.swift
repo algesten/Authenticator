@@ -1,6 +1,6 @@
 //
 //  ExtensionDelegate.swift
-//  AuthenticatorWatch Extension
+//  Authenticator
 //
 //  Copyright (c) 2013-2016 Authenticator authors
 //
