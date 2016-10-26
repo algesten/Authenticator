@@ -30,6 +30,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     let app = WatchAppController()
     
     func applicationDidFinishLaunching() {
+        app.activateWCSession()
     }
 
     func applicationDidBecomeActive() {

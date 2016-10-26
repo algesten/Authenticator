@@ -30,7 +30,7 @@ import Foundation
 class WatchTokenListViewController: WKInterfaceController {
 
     // singleton
-    static var instance:WatchTokenListViewController!
+    static var instance:WatchTokenListViewController?
 
 
     override func awakeWithContext(context: AnyObject?) {

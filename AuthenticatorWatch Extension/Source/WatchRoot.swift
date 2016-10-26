@@ -70,16 +70,11 @@ extension WatchRoot {
 extension WatchRoot {
     enum Action {
         case TokenListAction(WatchTokenList.Action)
-
-        case RequestTokens
-        case ReceiveTokens([Token])
+        case TokenStoreUpdated([PersistentToken])
     }
     
     enum Effect {
-        case RequestTokens
-        case UpdateTokens([Token],
-            success: ([PersistentToken]) -> Action,
-            failure: (ErrorType) -> Action)
+        case RefreshTokenList([PersistentToken])
     }
     
     @warn_unused_result
@@ -87,10 +82,8 @@ extension WatchRoot {
         switch action {
         case .TokenListAction(let action):
             return handleTokenListAction(action)
-        case .RequestTokens():
-            return handleRequestTokens()
-        case .ReceiveTokens(let tokens):
-            return handleTokens(tokens)
+        case .TokenStoreUpdated(let tokens):
+            return .RefreshTokenList(tokens)
         }
     }
     
@@ -102,25 +95,11 @@ extension WatchRoot {
         }
         return nil
     }
-        
-    private mutating func handleRequestTokens() -> Effect? {
-        
-        return nil
-    }
     
-    private mutating func handleTokens(tokens:[Token]) -> Effect? {
-        return nil
-    }
-        
     @warn_unused_result
     private mutating func handleTokenListEffect(effect: WatchTokenList.Effect) -> Effect? {
         return nil
     }
-        
-        
-    
-}
 
-private func compose<A, B, C>(transform: A -> B, _ handler: B -> C) -> A -> C {
-    return { handler(transform($0)) }
+    
 }

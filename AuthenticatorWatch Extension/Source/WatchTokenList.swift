@@ -43,15 +43,18 @@ struct WatchTokenList : Component {
     }
     
     enum Action {
-        
+        case TokenListUpdate([PersistentToken])
     }
     enum Effect {
-        
     }
     
     @warn_unused_result
     mutating func update(action: Action) -> Effect? {
-        return nil
+        switch action {
+        case .TokenListUpdate(let tokens):
+            self.persistentTokens = tokens
+            return nil
+        }
     }
     
 }

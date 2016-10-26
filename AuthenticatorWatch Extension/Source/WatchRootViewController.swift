@@ -31,7 +31,9 @@ class WatchRootViewController {
     
     private var currentViewModel:WatchRoot.ViewModel
 
-    private var tokenListViewController: WatchTokenListViewController
+    private var tokenListViewController: WatchTokenListViewController? {
+        return WatchTokenListViewController.instance
+    }
     
     private let dispatchAction: (WatchRoot.Action) -> ()
     
@@ -39,8 +41,6 @@ class WatchRootViewController {
     init(viewModel: WatchRoot.ViewModel, dispatchAction: (WatchRoot.Action) -> ()) {
         self.currentViewModel = viewModel
         self.dispatchAction = dispatchAction
-        // fish out the singleton from the storyboard
-        self.tokenListViewController = WatchTokenListViewController.instance
     }
     
 }
@@ -49,7 +49,7 @@ class WatchRootViewController {
 
 extension WatchRootViewController {
     func updateWithViewModel(viewModel: WatchRoot.ViewModel) {
-        tokenListViewController.updateWithViewModel(viewModel.tokenList)
+        tokenListViewController?.updateWithViewModel(viewModel.tokenList)
         
         switch viewModel.modal {
         case .None:

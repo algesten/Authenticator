@@ -27,10 +27,12 @@ import Foundation
 import OneTimePassword
 import WatchConnectivity
 
-private let kRequestTokensMessage = "OTPRequestTokensMessage"
-private let kPersistentTokensMessage = "OTPPersistentTokensMessage"
-
 extension TokenStore {
+    
+    func onReachable() {
+        // always request tokens to know we have the latest
+        requestTokens()
+    }
     
     // watch app request tokens to be pushed from the
     // phone. done when we launch the app.
@@ -38,36 +40,70 @@ extension TokenStore {
         simpleSend(kRequestTokensMessage)
     }
     
-    // invoked when we receive tokens from the phone, 
+    // invoked when we receive tokens from the phone,
     // both when we've requested it and when they are 
     // automatically pushed.
     func receivePersistentTokensMessage(data:NSData) {
-        
+        let arr = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [NSURL]
+        let tokens = arr.map() { Token(url: $0)! }
+        do {
+            try resetTokens(tokens)
+        } catch {
+            print("resetTokens failed with \(error)")
+        }
     }
     
 }
 
 
 
-// MARK: - WatchConnectivity functions
+// MARK: - WatchConnectivity
 
 extension TokenStore : WCSessionDelegate {
     
-    private var session:WCSession? {
+    func activeWCSession() {
+        // is the framework available?
         guard WCSession.isSupported() else {
-            return nil
+            return
         }
         let session = WCSession.defaultSession()
         session.delegate = self // before activate
         session.activateSession()
-        return session
     }
-
+    
     func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
-        // great, it's not overly interesting to
-        // see whether we fail to connect since not connecting
-        // is a "natural state" where the watch simply is
-        // far away from the phone.
+        switch activationState {
+        case .NotActivated:
+            // not much we can don about that
+            print("Session is not actived")
+        case .Inactive:
+            // this is a transitional state from activated -> not activated
+            print("Session is inactive")
+        case .Activated:
+            // All is good
+            if session.reachable {
+                onReachable()
+            }
+        }
+    }
+    
+    func sessionReachabilityDidChange(session: WCSession) {
+        if session.reachable {
+            onReachable()
+        }
+    }
+    
+    private var session:WCSession? {
+        // is the framework available at all?
+        guard WCSession.isSupported() else {
+            return nil
+        }
+        let session = WCSession.defaultSession()
+        // can we use it to communicate?
+        guard session.activationState == .Activated else {
+            return nil
+        }
+        return session
     }
     
     // validation free simple send and forget
@@ -83,10 +119,10 @@ extension TokenStore : WCSessionDelegate {
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         let name = message["name"] as! String;
         switch name {
-        case kPersistentTokensMessage:
+        case kTokensMessage:
             receivePersistentTokensMessage(message["data"] as! NSData)
         default:
-            NSLog("Received message with unknown name ", name)
+            print("Received message with unknown name ", name)
         }
     }
 

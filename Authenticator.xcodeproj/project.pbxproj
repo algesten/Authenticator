@@ -29,6 +29,9 @@
 		5BA42BBF1DBD5BF400A42213 /* WatchRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BBE1DBD5BF400A42213 /* WatchRootViewModel.swift */; };
 		5BA42BC21DBD5D4700A42213 /* WatchTokenListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BC11DBD5D4700A42213 /* WatchTokenListViewModel.swift */; };
 		5BA42BC41DBD674200A42213 /* WatchAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BC31DBD674200A42213 /* WatchAppController.swift */; };
+		5BED7C461DC05EF7003C9176 /* WCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BED7C451DC05EF7003C9176 /* WCSessionDelegate.swift */; };
+		5BED7C481DC0620D003C9176 /* WCMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BED7C471DC0620D003C9176 /* WCMessages.swift */; };
+		5BED7C491DC06244003C9176 /* WCMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BED7C471DC0620D003C9176 /* WCMessages.swift */; };
 		8B0028B511EB75920092DE18 /* ScannerOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0028B411EB75920092DE18 /* ScannerOverlayView.swift */; };
 		C910ADC11BF0315A00C988F5 /* TokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C910ADC01BF0315A00C988F5 /* TokenList.swift */; };
 		C92708AC19CFB0750033128B /* TokenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92708AB19CFB0750033128B /* TokenListViewController.swift */; };
@@ -169,6 +172,8 @@
 		5BA42BBE1DBD5BF400A42213 /* WatchRootViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchRootViewModel.swift; sourceTree = "<group>"; };
 		5BA42BC11DBD5D4700A42213 /* WatchTokenListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenListViewModel.swift; sourceTree = "<group>"; };
 		5BA42BC31DBD674200A42213 /* WatchAppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchAppController.swift; sourceTree = "<group>"; };
+		5BED7C451DC05EF7003C9176 /* WCSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCSessionDelegate.swift; sourceTree = "<group>"; };
+		5BED7C471DC0620D003C9176 /* WCMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCMessages.swift; sourceTree = "<group>"; };
 		8B0028B411EB75920092DE18 /* ScannerOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerOverlayView.swift; sourceTree = "<group>"; };
 		8B2B8AE1118BA49F00437315 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		8BF5147F118799AE005C936F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -602,6 +607,8 @@
 			isa = PBXGroup;
 			children = (
 				C9F7A8601C4D90B50082E5AE /* TokenStore.swift */,
+				5BED7C451DC05EF7003C9176 /* WCSessionDelegate.swift */,
+				5BED7C471DC0620D003C9176 /* WCMessages.swift */,
 			);
 			name = "Data Store";
 			sourceTree = "<group>";
@@ -830,6 +837,7 @@
 				C9CC09531BA9133B008C54FE /* FocusCell.swift in Sources */,
 				C99069D1180CBAC900BAEF53 /* TokenScannerViewController.swift in Sources */,
 				C9EB448E1C52A74200ACFA87 /* Component.swift in Sources */,
+				5BED7C461DC05EF7003C9176 /* WCSessionDelegate.swift in Sources */,
 				C9D6C83F1906BD68004F0E08 /* SegmentedControlRow.swift in Sources */,
 				C968D1151CB4C639004ED7BB /* DisplayTime.swift in Sources */,
 				8B0028B511EB75920092DE18 /* ScannerOverlayView.swift in Sources */,
@@ -839,6 +847,7 @@
 				C9F7A8611C4D90B50082E5AE /* TokenStore.swift in Sources */,
 				C9CC09511BA903B7008C54FE /* TokenFormViewController.swift in Sources */,
 				C98B1ECC1AB3CF0700C59E53 /* TokenRowCell.swift in Sources */,
+				5BED7C481DC0620D003C9176 /* WCMessages.swift in Sources */,
 				C910ADC11BF0315A00C988F5 /* TokenList.swift in Sources */,
 				C9919CDD1BA64EED006237C1 /* TokenEntryForm.swift in Sources */,
 			);
@@ -860,6 +869,7 @@
 				5B4344501DBE95CA00D31302 /* WatchEntryViewController.swift in Sources */,
 				5BA42BAF1DBD117900A42213 /* Component.swift in Sources */,
 				5B39F4E21DBD100D00CD2DAB /* WatchTokenListViewController.swift in Sources */,
+				5BED7C491DC06244003C9176 /* WCMessages.swift in Sources */,
 				5BA42BB21DBD11CF00A42213 /* WatchTokenList.swift in Sources */,
 				5B43444C1DBE94FE00D31302 /* WatchEntry.swift in Sources */,
 			);

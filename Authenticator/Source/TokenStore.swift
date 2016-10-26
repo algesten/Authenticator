@@ -30,6 +30,7 @@ class TokenStore : NSObject {
     private let keychain: Keychain
     private let userDefaults: NSUserDefaults
     private(set) var persistentTokens: [PersistentToken]
+    var onChangeCallback:(() -> ())?
 
     // Throws an error if the initial state could not be loaded from the keychain.
     init(keychain: Keychain, userDefaults: NSUserDefaults) throws {
@@ -74,11 +75,13 @@ extension TokenStore {
         let newPersistentToken = try keychain.addToken(token)
         persistentTokens.append(newPersistentToken)
         saveTokenOrder()
+        onChangeCallback?()
     }
     
     func resetTokens(tokens:[Token]) throws {
         try keychain.resetTokens(tokens)
         saveTokenOrder()
+        onChangeCallback?()
     }
 
     func saveToken(token: Token, toPersistentToken persistentToken: PersistentToken) throws {
@@ -91,11 +94,13 @@ extension TokenStore {
             }
             return $0
         }
+        onChangeCallback?()
     }
 
     func updatePersistentToken(persistentToken: PersistentToken) throws {
         let newToken = persistentToken.token.updatedToken()
         try saveToken(newToken, toPersistentToken: persistentToken)
+        onChangeCallback?()
     }
 
     func moveTokenFromIndex(origin: Int, toIndex destination: Int) {
@@ -103,6 +108,7 @@ extension TokenStore {
         persistentTokens.removeAtIndex(origin)
         persistentTokens.insert(persistentToken, atIndex: destination)
         saveTokenOrder()
+        onChangeCallback?()
     }
 
     func deletePersistentToken(persistentToken: PersistentToken) throws {
@@ -111,6 +117,7 @@ extension TokenStore {
             persistentTokens.removeAtIndex(index)
         }
         saveTokenOrder()
+        onChangeCallback?()
     }
 }
 
