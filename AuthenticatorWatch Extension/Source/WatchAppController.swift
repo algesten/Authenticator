@@ -63,7 +63,7 @@ class WatchAppController {
     }
 
     func activateWCSession() {
-        store.activeWCSession()
+        store.activateWCSession()
     }
 
     private func handleAction(action: WatchRoot.Action) {

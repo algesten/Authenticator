@@ -26,4 +26,6 @@
 import Foundation
 
 struct WatchTokenListViewModel {
+    let rowModels:[WatchTokenRowModel]
+    let selectRowAction:(index:Int) -> WatchTokenList.Action
 }

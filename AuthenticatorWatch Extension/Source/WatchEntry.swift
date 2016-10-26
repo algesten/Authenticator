@@ -24,15 +24,22 @@
 //
 
 import Foundation
+import OneTimePassword
 
 struct WatchEntry : Component {
 
-    var viewModel: WatchEntryViewModel {
-        return WatchEntryViewModel()
+    var persistentToken:PersistentToken?
+    
+    var viewModel: WatchEntryViewModel? {
+        guard let persistentToken = persistentToken else {
+            return nil
+        }
+        return WatchEntryViewModel(persistentToken:persistentToken)
     }
     
     enum Action {
-        
+        case SelectToken(PersistentToken)
+        case UnselectToken
     }
     enum Effect {
         
@@ -40,6 +47,12 @@ struct WatchEntry : Component {
     
     @warn_unused_result
     mutating func update(action: Action) -> Effect? {
+        switch action {
+        case .SelectToken(let token):
+            persistentToken = token
+        case .UnselectToken:
+            persistentToken = nil
+        }
         return nil
     }
     

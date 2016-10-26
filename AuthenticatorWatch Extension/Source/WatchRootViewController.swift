@@ -49,7 +49,11 @@ class WatchRootViewController {
 
 extension WatchRootViewController {
     func updateWithViewModel(viewModel: WatchRoot.ViewModel) {
-        tokenListViewController?.updateWithViewModel(viewModel.tokenList)
+        
+        tokenListViewController?.updateWithViewModel(
+            viewModel.tokenList,
+            dispatchAction: compose(WatchRoot.Action.TokenListAction, dispatchAction)
+        )
         
         switch viewModel.modal {
         case .None:
@@ -64,4 +68,10 @@ extension WatchRootViewController {
             }
         }
     }
+}
+
+
+
+private func compose<A, B, C>(transform: A -> B, _ handler: B -> C) -> A -> C {
+    return { handler(transform($0)) }
 }

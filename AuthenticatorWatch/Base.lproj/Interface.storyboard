@@ -8,7 +8,36 @@
         <!--Watch Token List View Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="WatchTokenListViewController" customModule="AuthenticatorWatch_Extension"/>
+                <controller id="AgC-eL-Hgc" customClass="WatchTokenListViewController" customModule="AuthenticatorWatch_Extension">
+                    <items>
+                        <table alignment="left" id="hTl-CQ-0l8">
+                            <items>
+                                <tableRow identifier="TokenCell" id="nsI-Xk-y4W" customClass="WatchTokenListRowController" customModule="AuthenticatorWatch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="UZy-lD-c62">
+                                        <items>
+                                            <label height="15" alignment="left" text="Github" minimumScaleFactor="0.80000000000000004" id="h6a-Eo-uxG">
+                                                <color key="textColor" red="0.66666666666666663" green="0.6588235294117647" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" weight="light" pointSize="15"/>
+                                            </label>
+                                            <label height="15" alignment="left" text="martin@algesten.se smaller smaller" minimumScaleFactor="0.80000000000000004" id="s3b-HD-0fv">
+                                                <color key="textColor" red="0.98039215686274506" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" weight="light" pointSize="15"/>
+                                            </label>
+                                        </items>
+                                        <edgeInsets key="margins" left="7" right="0.0" top="0.0" bottom="2"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="issuerLabel" destination="h6a-Eo-uxG" id="7ps-81-GD3"/>
+                                        <outlet property="nameLabel" destination="s3b-HD-0fv" id="sKf-ya-6Wu"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="tokenListTable" destination="hTl-CQ-0l8" id="iha-7T-wV7"/>
+                    </connections>
+                </controller>
             </objects>
         </scene>
     </scenes>

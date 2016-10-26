@@ -43,3 +43,10 @@ class WatchEntryViewController: WKInterfaceController {
     }
 
 }
+
+// MARK: - Presenter
+
+extension WatchEntryViewController {
+    func updateWithViewModel(viewModel: WatchEntry.ViewModel) {
+    }
+}

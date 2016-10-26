@@ -72,7 +72,7 @@ class AppController {
     
     func activateWCSession() {
         if #available(iOS 9.0, *) {
-            store.activeWCSession()
+            store.activateWCSession()
         }
     }
 

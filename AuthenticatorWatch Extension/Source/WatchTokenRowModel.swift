@@ -1,5 +1,5 @@
 //
-//  WatchTokenList.swift
+//  WatchTokenRowModel.swift
 //  Authenticator
 //
 //  Copyright (c) 2013-2016 Authenticator authors
@@ -26,45 +26,12 @@
 import Foundation
 import OneTimePassword
 
-struct WatchTokenList : Component {
+struct WatchTokenRowModel {
     
-    var persistentTokens:[PersistentToken]
-    
-    init(persistentTokens: [PersistentToken]) {
-        self.persistentTokens = persistentTokens
+    let name, issuer:String
+
+    init(persistentToken:PersistentToken) {
+        name = persistentToken.token.name
+        issuer = persistentToken.token.issuer
     }
-    
-    var viewModel: WatchTokenListViewModel {
-        let rowModels = persistentTokens.map({
-            WatchTokenRowModel(persistentToken: $0)
-        })
-        func selectRowAction(index:Int) -> WatchTokenList.Action {
-            let selected = persistentTokens[index]
-            return .SelectToken(selected)
-        }
-        return WatchTokenListViewModel(rowModels: rowModels, selectRowAction: selectRowAction)
-    }
-    
-    enum Action {
-        case SelectToken(PersistentToken)
-        case TokenListUpdate([PersistentToken])
-    }
-    enum Effect {
-        case SelectListEntry(PersistentToken)
-    }
-    
-    @warn_unused_result
-    mutating func update(action: Action) -> Effect? {
-        switch action {
-        case .SelectToken(_):
-            return nil
-        case .TokenListUpdate(let tokens):
-            self.persistentTokens = tokens
-            return nil
-        }
-    }
-    
 }
-
-
-

@@ -28,6 +28,7 @@ import OneTimePassword
 
 struct WatchRoot : Component {
     private var tokenList: WatchTokenList
+    private var watchEntry: WatchEntry
     private var modal: WatchModal
  
     private enum WatchModal {
@@ -39,13 +40,17 @@ struct WatchRoot : Component {
             case .None:
                 return .None
             case .EntryView(let component):
-                return .EntryView(component.viewModel)
+                guard let viewModel = component.viewModel else {
+                    return .None
+                }
+                return .EntryView(viewModel)
             }
         }
     }
 
     init(persistentTokens: [PersistentToken]) {
         tokenList = WatchTokenList(persistentTokens: persistentTokens)
+        watchEntry = WatchEntry()
         modal = .None
     }
     
@@ -70,6 +75,7 @@ extension WatchRoot {
 extension WatchRoot {
     enum Action {
         case TokenListAction(WatchTokenList.Action)
+        case EntryAction(WatchEntry.Action)
         case TokenStoreUpdated([PersistentToken])
     }
     
@@ -82,6 +88,8 @@ extension WatchRoot {
         switch action {
         case .TokenListAction(let action):
             return handleTokenListAction(action)
+        case .EntryAction(let action):
+            return handleWatchEntryAction(action)
         case .TokenStoreUpdated(let tokens):
             return .RefreshTokenList(tokens)
         }
@@ -97,9 +105,22 @@ extension WatchRoot {
     }
     
     @warn_unused_result
+    private mutating func handleWatchEntryAction(action: WatchEntry.Action) -> Effect? {
+        let effect = watchEntry.update(action)
+        if let effect = effect {
+            return handleWatchEntryEffect(effect)
+        }
+        return nil
+    }
+    
+    @warn_unused_result
     private mutating func handleTokenListEffect(effect: WatchTokenList.Effect) -> Effect? {
         return nil
     }
 
+    @warn_unused_result
+    private mutating func handleWatchEntryEffect(effect: WatchEntry.Effect) -> Effect? {
+        return nil
+    }
     
 }

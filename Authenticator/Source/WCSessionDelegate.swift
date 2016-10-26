@@ -14,7 +14,7 @@ import WatchConnectivity
 @available(iOS 9.0, *)
 extension TokenStore : WCSessionDelegate {
 
-    func activeWCSession() {
+    func activateWCSession() {
         guard WCSession.isSupported() else {
             return
         }

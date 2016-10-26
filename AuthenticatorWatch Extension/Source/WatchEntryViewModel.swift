@@ -24,7 +24,47 @@
 //
 
 import Foundation
+import OneTimePassword
 
 struct WatchEntryViewModel {
+    typealias Action = WatchTokenList.Action
+    
+    var password: String {
+        return _password()
+    }
+    private let _password:() -> String
+
+    var progress: Double? {
+        return _progress()
+    }
+    private let _progress: () -> Double?
+    
+    let isHOTP: Bool
+
+    init(persistentToken:PersistentToken) {
+        _password = {
+            // Generate the token for the current time
+            return (try? persistentToken.token.generator.passwordAtTime(NSDate().timeIntervalSince1970)) ?? ""
+        }
+        _progress = {
+            guard case .Timer(let period) = persistentToken.token.generator.factor else {
+                // If there is not a time-based tokens, return nil to hide the progress.
+                return nil
+            }
+            guard period > 0 else {
+                // If the period is >= zero, return zero to display the progress but avoid the potential
+                // divide-by-zero error below.
+                return 0
+            }
+            // Calculate the percentage progress in the current period.
+            return fmod(NSDate().timeIntervalSince1970, period) / period
+        }
+        // XXX to support HOTP we need to persist tokens back to the phone.
+        if case .Counter = persistentToken.token.generator.factor {
+            isHOTP = true
+        } else {
+            isHOTP = false
+        }
+    }
     
 }

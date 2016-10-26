@@ -1,6 +1,6 @@
 //
 //  WatchTokenListController.swift
-//  Authenticato
+//  Authenticator
 //
 //  Copyright (c) 2013-2016 Authenticator authors
 //
@@ -29,10 +29,18 @@ import Foundation
 // this is the root view controller
 class WatchTokenListViewController: WKInterfaceController {
 
+    enum UserInput {
+        case SelectRow(index:Int)
+    }
+    typealias UserInputHandler = UserInput -> ()
+    
     // singleton
     static var instance:WatchTokenListViewController?
 
+    @IBOutlet weak var tokenListTable: WKInterfaceTable!
 
+    var handleUserInput: UserInputHandler?
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
 
@@ -50,13 +58,45 @@ class WatchTokenListViewController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
+    
+    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+        handleUserInput?(.SelectRow(index:rowIndex))
+    }
 
+}
+
+class WatchTokenListRowController : NSObject {
+    @IBOutlet weak var issuerLabel: WKInterfaceLabel!
+    @IBOutlet weak var nameLabel: WKInterfaceLabel!
 }
 
 
 // MARK: - Presenter
 
 extension WatchTokenListViewController {
-    func updateWithViewModel(viewModel: WatchTokenList.ViewModel) {
+    
+    func updateWithViewModel(viewModel: WatchTokenList.ViewModel, dispatchAction: (WatchTokenList.Action) -> ()) {
+
+        // set the dispatchAction here, since we are not instantiated by the
+        // root component.
+        self.handleUserInput = {
+            switch $0 {
+            case .SelectRow(let index):
+                let action = viewModel.selectRowAction(index:index)
+                dispatchAction(action)
+            }
+        }
+        
+        // this instantiates the number of WatchTokenListRowController needed
+        // in the loop below
+        tokenListTable.setNumberOfRows(viewModel.rowModels.count, withRowType: "TokenCell")
+
+        for (index, rowModel) in viewModel.rowModels.enumerate() {
+            let rowController = tokenListTable.rowControllerAtIndex(index) as! WatchTokenListRowController
+            rowController.issuerLabel.setText(rowModel.issuer)
+            rowController.nameLabel.setText(rowModel.name)
+        }
+    
     }
+
 }

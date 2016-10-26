@@ -61,7 +61,7 @@ extension TokenStore {
 
 extension TokenStore : WCSessionDelegate {
     
-    func activeWCSession() {
+    func activateWCSession() {
         // is the framework available?
         guard WCSession.isSupported() else {
             return
