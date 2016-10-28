@@ -46,9 +46,17 @@ extension TokenStore {
     func receivePersistentTokensMessage(data:NSData) {
         let arr = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [NSURL]
         let tokens = arr.map() { Token(url: $0)! }
+
+        // XXX remove me. Since we hijacked persistence in OneTimePassword, 
+        // we get test tokens both in app and phone simulator
+        onChangeCallback?()
+        return
+        
         do {
             try resetTokens(tokens)
         } catch {
+            // XXX keychain storage errors end up here,
+            // perhaps show some error message to the user?
             print("resetTokens failed with \(error)")
         }
     }

@@ -61,10 +61,14 @@ extension WatchRootViewController {
                 // it is visible and presenting, dismiss it
                 vc.dismissController()
             }
-        case .EntryView:
+        case .EntryView(let entryViewModel):
             if WatchEntryViewController.instance == nil {
-                // it is not presenting, make it.
-                
+                // it is not presenting, so make it.
+                // seems nigh on impossible to get the entryViewModel into the
+                // next controller. it seems a  struct is just not going to fit
+                // in an AnyObject?
+                WatchEntryViewController.viewModel = entryViewModel
+                tokenListViewController?.pushControllerWithName("entry", context: nil)
             }
         }
     }

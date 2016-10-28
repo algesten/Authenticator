@@ -70,6 +70,7 @@ class AppController {
         }
     }
     
+    // app delegate will activate in didFinishLaunchingWithOptions
     func activateWCSession() {
         if #available(iOS 9.0, *) {
             store.activateWCSession()

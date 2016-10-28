@@ -5,26 +5,27 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11077"/>
     </dependencies>
     <scenes>
-        <!--Watch Token List View Controller-->
+        <!--tokenList-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="WatchTokenListViewController" customModule="AuthenticatorWatch_Extension">
+                <controller identifier="tokenList" id="AgC-eL-Hgc" customClass="WatchTokenListViewController" customModule="AuthenticatorWatch_Extension">
                     <items>
                         <table alignment="left" id="hTl-CQ-0l8">
                             <items>
                                 <tableRow identifier="TokenCell" id="nsI-Xk-y4W" customClass="WatchTokenListRowController" customModule="AuthenticatorWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="UZy-lD-c62">
                                         <items>
-                                            <label height="15" alignment="left" text="Github" minimumScaleFactor="0.80000000000000004" id="h6a-Eo-uxG">
+                                            <label alignment="left" text="Github" minimumScaleFactor="0.80000000000000004" id="h6a-Eo-uxG">
                                                 <color key="textColor" red="0.66666666666666663" green="0.6588235294117647" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" type="system" weight="light" pointSize="15"/>
+                                                <fontDescription key="font" type="system" weight="light" pointSize="14"/>
                                             </label>
-                                            <label height="15" alignment="left" text="martin@algesten.se smaller smaller" minimumScaleFactor="0.80000000000000004" id="s3b-HD-0fv">
+                                            <label alignment="left" text="martin@algesten.se" minimumScaleFactor="0.80000000000000004" id="s3b-HD-0fv">
                                                 <color key="textColor" red="0.98039215686274506" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" type="system" weight="light" pointSize="15"/>
+                                                <fontDescription key="font" type="system" weight="ultraLight" pointSize="14"/>
                                             </label>
                                         </items>
-                                        <edgeInsets key="margins" left="7" right="0.0" top="0.0" bottom="2"/>
+                                        <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <edgeInsets key="margins" left="7" right="7" top="3" bottom="3"/>
                                     </group>
                                     <connections>
                                         <outlet property="issuerLabel" destination="h6a-Eo-uxG" id="7ps-81-GD3"/>
@@ -36,9 +37,43 @@
                     </items>
                     <connections>
                         <outlet property="tokenListTable" destination="hTl-CQ-0l8" id="iha-7T-wV7"/>
+                        <segue destination="k1d-Dk-C3v" kind="relationship" relationship="nextPage" id="x6r-UZ-0nm"/>
                     </connections>
                 </controller>
             </objects>
+        </scene>
+        <!--entry-->
+        <scene sceneID="wQB-h1-bvs">
+            <objects>
+                <controller identifier="entry" id="k1d-Dk-C3v" customClass="WatchEntryViewController" customModule="AuthenticatorWatch_Extension">
+                    <items>
+                        <group width="1" alignment="left" verticalAlignment="center" layout="vertical" spacing="0.0" id="mUf-yq-MU1" userLabel="Vertical Center">
+                            <items>
+                                <group width="1" alignment="left" layout="vertical" id="rUj-Tv-K6U">
+                                    <items>
+                                        <label width="1" alignment="left" text="Github" textAlignment="center" id="ZnM-9o-McT">
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" type="system" pointSize="15"/>
+                                        </label>
+                                        <label width="1" alignment="left" text="martin@algesten.se" textAlignment="center" minimumScaleFactor="0.5" id="0PW-Qr-Cb4">
+                                            <fontDescription key="font" type="system" weight="ultraLight" pointSize="15"/>
+                                        </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="6"/>
+                                </group>
+                                <group width="1" height="2" alignment="left" id="vdJ-3i-a3v">
+                                    <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <label width="1" alignment="left" text="888888" textAlignment="center" minimumScaleFactor="0.5" id="KmY-e8-FGP">
+                                    <fontDescription key="font" type="system" weight="ultraLight" pointSize="42"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="20"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="316" y="70"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.98039215686274506" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>

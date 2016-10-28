@@ -28,7 +28,6 @@ import OneTimePassword
 
 struct WatchRoot : Component {
     private var tokenList: WatchTokenList
-    private var watchEntry: WatchEntry
     private var modal: WatchModal
  
     private enum WatchModal {
@@ -50,7 +49,6 @@ struct WatchRoot : Component {
 
     init(persistentTokens: [PersistentToken]) {
         tokenList = WatchTokenList(persistentTokens: persistentTokens)
-        watchEntry = WatchEntry()
         modal = .None
     }
     
@@ -106,6 +104,9 @@ extension WatchRoot {
     
     @warn_unused_result
     private mutating func handleWatchEntryAction(action: WatchEntry.Action) -> Effect? {
+        guard case .EntryView(var watchEntry) = modal else {
+            return nil
+        }
         let effect = watchEntry.update(action)
         if let effect = effect {
             return handleWatchEntryEffect(effect)
@@ -115,7 +116,11 @@ extension WatchRoot {
     
     @warn_unused_result
     private mutating func handleTokenListEffect(effect: WatchTokenList.Effect) -> Effect? {
-        return nil
+        switch effect {
+        case .BeginShowEntry(let token):
+            modal = .EntryView(WatchEntry(persistentToken:token))
+            return nil
+        }
     }
 
     @warn_unused_result

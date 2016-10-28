@@ -28,13 +28,24 @@ import Foundation
 
 class WatchEntryViewController: WKInterfaceController {
 
+    // hack way of passing arguments into this controller
+    static var viewModel:WatchEntry.ViewModel?
+    
     // current instance (if presented)
     static var instance:WatchEntryViewController?
     
     
-    override func willActivate() {
-        super.willActivate()
+    override func awakeWithContext(context: AnyObject?) {
+
+        // singleton
         WatchEntryViewController.instance = self
+        
+        // there really ought to be a viewModel there
+        guard let viewModel = WatchEntryViewController.viewModel else {
+            return
+        }
+        updateWithViewModel(viewModel)
+        
     }
     
     override func didDeactivate() {

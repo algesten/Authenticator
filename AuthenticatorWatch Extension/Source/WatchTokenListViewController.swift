@@ -46,7 +46,7 @@ class WatchTokenListViewController: WKInterfaceController {
 
         // assign singleton
         WatchTokenListViewController.instance = self
-        
+
     }
     
     override func willActivate() {
