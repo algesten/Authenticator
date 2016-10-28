@@ -25,6 +25,7 @@
 
 import WatchKit
 import Foundation
+import CoreGraphics
 
 class WatchEntryViewController: WKInterfaceController {
 
@@ -34,6 +35,10 @@ class WatchEntryViewController: WKInterfaceController {
     // current instance (if presented)
     static var instance:WatchEntryViewController?
     
+    @IBOutlet weak var issuerLabel: WKInterfaceLabel!
+    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet weak var progressGroup: WKInterfaceGroup!
+    @IBOutlet weak var passwordLabel: WKInterfaceLabel!
     
     override func awakeWithContext(context: AnyObject?) {
 
@@ -45,7 +50,7 @@ class WatchEntryViewController: WKInterfaceController {
             return
         }
         updateWithViewModel(viewModel)
-        
+
     }
     
     override func didDeactivate() {
@@ -59,5 +64,62 @@ class WatchEntryViewController: WKInterfaceController {
 
 extension WatchEntryViewController {
     func updateWithViewModel(viewModel: WatchEntry.ViewModel) {
+        
+        issuerLabel.setText(viewModel.issuer)
+        nameLabel.setText(viewModel.name)
+        passwordLabel.setText(viewModel.password)
+        
+        if viewModel.progress == nil {
+            // nil means there is no timer based thing to show
+            progressGroup.setHidden(true)
+        } else {
+            progressGroup.setHidden(false)
+            // start a timer that repeatedly will update the progress
+            NSTimer.scheduledTimerWithTimeInterval(0.05, repeats: true) { [weak self] _ in
+                guard let progress = viewModel.progress else {
+                    return
+                }
+                self?.passwordLabel.setText(viewModel.password)
+                self?.drawProgress(progress)
+            }
+        }
+        
+    }
+    func updateProgress(viewModel: WatchEntry.ViewModel) {
     }
 }
+
+// MARK: - Progress line
+
+extension WatchEntryViewController {
+    
+    func drawProgress(progress:Double) {
+        let width = self.contentFrame.size.width
+        
+        let size = CGSize(width:width, height:4.0)
+        
+        
+        UIGraphicsBeginImageContext(size)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        
+        // Setup appearance
+        CGContextSetFillColorWithColor(context, UIColor.otpDarkColor.CGColor)
+
+        // fill a rectangle of the progress
+        CGContextFillRect(context, CGRectMake(0, 0, CGFloat(1 - progress) * width, 4.0))
+        
+        // Convert to UIImage
+        let cgimage = CGBitmapContextCreateImage(context)!
+        let uiimage = UIImage(CGImage: cgimage)
+        
+        // and slot into our holder group
+        progressGroup.setBackgroundImage(uiimage)
+        
+        // End the graphics context
+        UIGraphicsEndImageContext()
+    }
+    
+}
+

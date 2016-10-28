@@ -21,6 +21,8 @@
 		5B43444E1DBE956600D31302 /* WatchEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43444D1DBE956600D31302 /* WatchEntryViewModel.swift */; };
 		5B4344501DBE95CA00D31302 /* WatchEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43444F1DBE95CA00D31302 /* WatchEntryViewController.swift */; };
 		5B5917D71DC1187100043DD5 /* WatchTokenRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5917D61DC1187100043DD5 /* WatchTokenRowModel.swift */; };
+		5B7A0AD21DC3987C0077E9E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7A0AD11DC3987C0077E9E9 /* CoreGraphics.framework */; };
+		5B7A0AD31DC39AAF0077E9E9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93AD15119CD51BE007480E9 /* Colors.swift */; };
 		5BA42BAF1DBD117900A42213 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EB448D1C52A74200ACFA87 /* Component.swift */; };
 		5BA42BB21DBD11CF00A42213 /* WatchTokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */; };
 		5BA42BB41DBD135D00A42213 /* Base32.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C944A5581A7ECB3100E08B1E /* Base32.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -168,6 +170,7 @@
 		5B43444D1DBE956600D31302 /* WatchEntryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntryViewModel.swift; sourceTree = "<group>"; };
 		5B43444F1DBE95CA00D31302 /* WatchEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntryViewController.swift; sourceTree = "<group>"; };
 		5B5917D61DC1187100043DD5 /* WatchTokenRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenRowModel.swift; sourceTree = "<group>"; };
+		5B7A0AD11DC3987C0077E9E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenList.swift; sourceTree = "<group>"; };
 		5BA42BB91DBD4DC500A42213 /* WatchTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenStore.swift; sourceTree = "<group>"; };
 		5BA42BBB1DBD5AF300A42213 /* WatchRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchRoot.swift; sourceTree = "<group>"; };
@@ -259,6 +262,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B7A0AD21DC3987C0077E9E9 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +336,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B7A0AD11DC3987C0077E9E9 /* CoreGraphics.framework */,
 				C944A5581A7ECB3100E08B1E /* Base32.framework */,
 				C944A5561A7ECB0800E08B1E /* OneTimePassword.framework */,
 				C97CDF241BEEA49300D64406 /* SVProgressHUD.framework */,
@@ -871,6 +876,7 @@
 				5BA42BC21DBD5D4700A42213 /* WatchTokenListViewModel.swift in Sources */,
 				5BA42BBA1DBD4DC500A42213 /* WatchTokenStore.swift in Sources */,
 				5BA42BBF1DBD5BF400A42213 /* WatchRootViewModel.swift in Sources */,
+				5B7A0AD31DC39AAF0077E9E9 /* Colors.swift in Sources */,
 				5BA42BBC1DBD5AF300A42213 /* WatchRoot.swift in Sources */,
 				5B5917D71DC1187100043DD5 /* WatchTokenRowModel.swift in Sources */,
 				5B43444E1DBE956600D31302 /* WatchEntryViewModel.swift in Sources */,

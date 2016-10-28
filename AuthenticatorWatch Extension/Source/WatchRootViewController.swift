@@ -69,6 +69,8 @@ extension WatchRootViewController {
                 // in an AnyObject?
                 WatchEntryViewController.viewModel = entryViewModel
                 tokenListViewController?.pushControllerWithName("entry", context: nil)
+            } else {
+                WatchEntryViewController.instance?.updateWithViewModel(entryViewModel)
             }
         }
     }

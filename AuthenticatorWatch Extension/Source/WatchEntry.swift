@@ -30,7 +30,7 @@ struct WatchEntry : Component {
 
     let persistentToken:PersistentToken
     
-    var viewModel: WatchEntryViewModel? {
+    var viewModel: WatchEntryViewModel {
         return WatchEntryViewModel(persistentToken:persistentToken)
     }
     

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11077"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
         <!--tokenList-->
@@ -37,15 +40,14 @@
                     </items>
                     <connections>
                         <outlet property="tokenListTable" destination="hTl-CQ-0l8" id="iha-7T-wV7"/>
-                        <segue destination="k1d-Dk-C3v" kind="relationship" relationship="nextPage" id="x6r-UZ-0nm"/>
                     </connections>
                 </controller>
             </objects>
         </scene>
-        <!--entry-->
+        <!--Back-->
         <scene sceneID="wQB-h1-bvs">
             <objects>
-                <controller identifier="entry" id="k1d-Dk-C3v" customClass="WatchEntryViewController" customModule="AuthenticatorWatch_Extension">
+                <controller identifier="entry" title="Back" id="k1d-Dk-C3v" customClass="WatchEntryViewController" customModule="AuthenticatorWatch_Extension">
                     <items>
                         <group width="1" alignment="left" verticalAlignment="center" layout="vertical" spacing="0.0" id="mUf-yq-MU1" userLabel="Vertical Center">
                             <items>
@@ -61,8 +63,8 @@
                                     </items>
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="6"/>
                                 </group>
-                                <group width="1" height="2" alignment="left" id="vdJ-3i-a3v">
-                                    <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <group width="1" height="4" alignment="left" spacing="0.0" id="vdJ-3i-a3v">
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
                                 <label width="1" alignment="left" text="888888" textAlignment="center" minimumScaleFactor="0.5" id="KmY-e8-FGP">
                                     <fontDescription key="font" type="system" weight="ultraLight" pointSize="42"/>
@@ -71,9 +73,15 @@
                             <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="20"/>
                         </group>
                     </items>
+                    <connections>
+                        <outlet property="issuerLabel" destination="ZnM-9o-McT" id="nYr-Es-FcI"/>
+                        <outlet property="nameLabel" destination="0PW-Qr-Cb4" id="NIs-Df-Jq7"/>
+                        <outlet property="passwordLabel" destination="KmY-e8-FGP" id="fNG-Bw-FuD"/>
+                        <outlet property="progressGroup" destination="vdJ-3i-a3v" id="B2M-aA-4cm"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="316" y="70"/>
+            <point key="canvasLocation" x="343" y="37"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.98039215686274506" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>

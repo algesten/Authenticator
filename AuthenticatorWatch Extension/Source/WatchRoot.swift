@@ -39,10 +39,7 @@ struct WatchRoot : Component {
             case .None:
                 return .None
             case .EntryView(let component):
-                guard let viewModel = component.viewModel else {
-                    return .None
-                }
-                return .EntryView(viewModel)
+                return .EntryView(component.viewModel)
             }
         }
     }

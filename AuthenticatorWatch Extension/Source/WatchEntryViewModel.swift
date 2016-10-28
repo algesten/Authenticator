@@ -29,6 +29,8 @@ import OneTimePassword
 struct WatchEntryViewModel {
     typealias Action = WatchTokenList.Action
     
+    let name, issuer:String
+
     var password: String {
         return _password()
     }
@@ -42,6 +44,8 @@ struct WatchEntryViewModel {
     let isHOTP: Bool
 
     init(persistentToken:PersistentToken) {
+        name = persistentToken.token.name
+        issuer = persistentToken.token.issuer
         _password = {
             // Generate the token for the current time
             return (try? persistentToken.token.generator.passwordAtTime(NSDate().timeIntervalSince1970)) ?? ""
