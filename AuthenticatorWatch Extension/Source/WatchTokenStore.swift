@@ -49,8 +49,8 @@ extension TokenStore {
 
         // XXX remove me. Since we hijacked persistence in OneTimePassword, 
         // we get test tokens both in app and phone simulator
-        onChangeCallback?()
-        return
+        //onChangeCallback?()
+        //return
         
         do {
             try resetTokens(tokens)

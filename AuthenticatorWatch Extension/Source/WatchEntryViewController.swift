@@ -31,6 +31,7 @@ class WatchEntryViewController: WKInterfaceController {
 
     // hack way of passing arguments into this controller
     static var viewModel:WatchEntry.ViewModel?
+    static var dispatchAction:((WatchEntry.Action) -> ())?
     
     // current instance (if presented)
     static var instance:WatchEntryViewController?
@@ -39,6 +40,11 @@ class WatchEntryViewController: WKInterfaceController {
     @IBOutlet weak var nameLabel: WKInterfaceLabel!
     @IBOutlet weak var progressGroup: WKInterfaceGroup!
     @IBOutlet weak var passwordLabel: WKInterfaceLabel!
+    
+    // timer if we have time based view
+    var timer:NSTimer?
+    
+    var onDidDeactivate:(() -> ())?
     
     override func awakeWithContext(context: AnyObject?) {
 
@@ -49,13 +55,19 @@ class WatchEntryViewController: WKInterfaceController {
         guard let viewModel = WatchEntryViewController.viewModel else {
             return
         }
-        updateWithViewModel(viewModel)
+        guard let dispatchAction = WatchEntryViewController.dispatchAction else {
+            return
+        }
+        updateWithViewModel(viewModel, dispatchAction: dispatchAction)
 
     }
     
     override func didDeactivate() {
-        WatchEntryViewController.instance = nil
         super.didDeactivate()
+        WatchEntryViewController.instance = nil
+        timer?.invalidate()
+        timer = nil
+        onDidDeactivate?()
     }
 
 }
@@ -63,11 +75,18 @@ class WatchEntryViewController: WKInterfaceController {
 // MARK: - Presenter
 
 extension WatchEntryViewController {
-    func updateWithViewModel(viewModel: WatchEntry.ViewModel) {
+    func updateWithViewModel(viewModel: WatchEntry.ViewModel, dispatchAction:(WatchEntry.Action) -> ()) {
+
+        // stop a (very not likely) previous timer
+        timer?.invalidate()
+        timer = nil
         
         issuerLabel.setText(viewModel.issuer)
         nameLabel.setText(viewModel.name)
         passwordLabel.setText(viewModel.password)
+        onDidDeactivate = {
+            dispatchAction(.Dismiss)
+        }
         
         if viewModel.progress == nil {
             // nil means there is no timer based thing to show
@@ -75,7 +94,7 @@ extension WatchEntryViewController {
         } else {
             progressGroup.setHidden(false)
             // start a timer that repeatedly will update the progress
-            NSTimer.scheduledTimerWithTimeInterval(0.05, repeats: true) { [weak self] _ in
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.05, repeats: true) { [weak self] _ in
                 guard let progress = viewModel.progress else {
                     return
                 }
@@ -105,7 +124,7 @@ extension WatchEntryViewController {
         }
         
         // Setup appearance
-        CGContextSetFillColorWithColor(context, UIColor.otpDarkColor.CGColor)
+        CGContextSetFillColorWithColor(context, UIColor.otpLightColor.CGColor)
 
         // fill a rectangle of the progress
         CGContextFillRect(context, CGRectMake(0, 0, CGFloat(1 - progress) * width, 4.0))

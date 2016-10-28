@@ -49,6 +49,10 @@
             <objects>
                 <controller identifier="entry" title="Back" id="k1d-Dk-C3v" customClass="WatchEntryViewController" customModule="AuthenticatorWatch_Extension">
                     <items>
+                        <group width="1" height="4" alignment="left" verticalAlignment="bottom" radius="0.0" spacing="0.0" id="vdJ-3i-a3v">
+                            <color key="backgroundColor" red="0.30588235294117649" green="0.30588235294117649" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
                         <group width="1" alignment="left" verticalAlignment="center" layout="vertical" spacing="0.0" id="mUf-yq-MU1" userLabel="Vertical Center">
                             <items>
                                 <group width="1" alignment="left" layout="vertical" id="rUj-Tv-K6U">
@@ -57,18 +61,23 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="font" type="system" pointSize="15"/>
                                         </label>
+                                        <group width="1" alignment="left" layout="vertical" spacing="0.0" id="Fdp-wh-apP">
+                                            <items>
+                                                <label width="1" alignment="left" text="888888" textAlignment="center" minimumScaleFactor="0.5" id="KmY-e8-FGP">
+                                                    <fontDescription key="font" type="system" weight="ultraLight" pointSize="41"/>
+                                                    <variation key="device=watch42mm">
+                                                        <fontDescription key="font" type="system" weight="ultraLight" pointSize="49"/>
+                                                    </variation>
+                                                </label>
+                                            </items>
+                                            <edgeInsets key="margins" left="0.0" right="0.0" top="6" bottom="6"/>
+                                        </group>
                                         <label width="1" alignment="left" text="martin@algesten.se" textAlignment="center" minimumScaleFactor="0.5" id="0PW-Qr-Cb4">
                                             <fontDescription key="font" type="system" weight="ultraLight" pointSize="15"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="6"/>
-                                </group>
-                                <group width="1" height="4" alignment="left" spacing="0.0" id="vdJ-3i-a3v">
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
-                                <label width="1" alignment="left" text="888888" textAlignment="center" minimumScaleFactor="0.5" id="KmY-e8-FGP">
-                                    <fontDescription key="font" type="system" weight="ultraLight" pointSize="42"/>
-                                </label>
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="20"/>
                         </group>

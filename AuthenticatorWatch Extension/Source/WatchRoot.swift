@@ -122,7 +122,16 @@ extension WatchRoot {
 
     @warn_unused_result
     private mutating func handleWatchEntryEffect(effect: WatchEntry.Effect) -> Effect? {
-        return nil
+        switch effect {
+        case .HideModal:
+            // this modal hiding is not really doing what it looks like
+            // the view has already dismissed it, and we're only updating
+            // to reflect that state. what we really would want is to 
+            // "drive the UI" so the view is a function of the state, 
+            // but that's not possible with watchos.
+            modal = .None
+            return nil
+        }
     }
     
 }

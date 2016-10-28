@@ -35,14 +35,18 @@ struct WatchEntry : Component {
     }
     
     enum Action {
+        case Dismiss
     }
     enum Effect {
-        
+        case HideModal
     }
     
     @warn_unused_result
     mutating func update(action: Action) -> Effect? {
-        return nil
+        switch action {
+        case .Dismiss:
+            return .HideModal
+        }
     }
     
     

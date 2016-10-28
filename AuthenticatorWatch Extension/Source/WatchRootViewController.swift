@@ -31,6 +31,8 @@ class WatchRootViewController {
     
     private var currentViewModel:WatchRoot.ViewModel
 
+    private var showingEntry = false
+    
     private var tokenListViewController: WatchTokenListViewController? {
         return WatchTokenListViewController.instance
     }
@@ -57,20 +59,32 @@ extension WatchRootViewController {
         
         switch viewModel.modal {
         case .None:
-            if let vc = WatchEntryViewController.instance {
-                // it is visible and presenting, dismiss it
-                vc.dismissController()
+            // this modal hiding is not really happening, because the
+            // watchos ui has already changed.
+            if showingEntry {
+                // it is visible and presenting? dismiss it!
+                WatchEntryViewController.instance?.dismissController()
             }
+            showingEntry = false
         case .EntryView(let entryViewModel):
-            if WatchEntryViewController.instance == nil {
+            let dispatchEntryAction = compose(WatchRoot.Action.EntryAction, dispatchAction)
+            if !showingEntry {
                 // it is not presenting, so make it.
+
                 // seems nigh on impossible to get the entryViewModel into the
-                // next controller. it seems a  struct is just not going to fit
-                // in an AnyObject?
+                // next controller. a  struct is just not going to fit
+                // in an AnyObject? every time we use these static singletons 
+                // for argument passing, a very cute fairy dies... tragic!
                 WatchEntryViewController.viewModel = entryViewModel
+                WatchEntryViewController.dispatchAction = dispatchEntryAction
+                
                 tokenListViewController?.pushControllerWithName("entry", context: nil)
+                showingEntry = true
             } else {
-                WatchEntryViewController.instance?.updateWithViewModel(entryViewModel)
+                WatchEntryViewController.instance?.updateWithViewModel(
+                    entryViewModel,
+                    dispatchAction: dispatchEntryAction
+                )
             }
         }
     }
