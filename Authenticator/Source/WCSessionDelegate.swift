@@ -8,6 +8,7 @@
 
 import Foundation
 import WatchConnectivity
+import OneTimePassword
 
 // MARK: - WatchConnectivity
 
@@ -55,7 +56,7 @@ extension TokenStore : WCSessionDelegate {
         // converted to NSData
         let data = NSKeyedArchiver.archivedDataWithRootObject(urls)
         // and ship it
-        simpleSendData(kTokensMessage, data: data)
+        simpleSendData(kMessage_resetTokens, data: data)
     }
 
     // validation free simple send and forget
@@ -69,7 +70,7 @@ extension TokenStore : WCSessionDelegate {
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         let name = message["name"] as! String;
         switch name {
-        case kRequestTokensMessage:
+        case kMessage_requestTokens:
             // watch wants tokens
             do {
                 try sendTokens()
@@ -81,4 +82,53 @@ extension TokenStore : WCSessionDelegate {
         }
     }
     
+}
+
+
+// MARK: - Delegate
+
+extension TokenStore : TokenStoreDelegate {
+
+    private func sendTokenOper(name:String, token:PersistentToken) {
+        if #available(iOS 9.0, *) {
+            do {
+                let data = NSKeyedArchiver.archivedDataWithRootObject(try token.token.toURL())
+                simpleSendData(name, data: data)
+            } catch {
+                print("serializing token failed \(error)")
+            }
+        }
+    }
+
+    func didAddToken(store: TokenStore, token: PersistentToken) {
+        sendTokenOper(kMessage_addToken, token: token)
+    }
+    func didResetTokens(store: TokenStore, tokens:[PersistentToken]) {
+        if #available(iOS 9.0, *) {
+            do {
+                try sendTokens()
+            } catch {
+                print("sendTokens failed \(error)")
+            }
+        }
+    }
+    func didSaveToken(store: TokenStore, token: PersistentToken) {
+        sendTokenOper(kMessage_saveToken, token: token)
+    }
+    func didUpdatePersistenToken(store: TokenStore, token:PersistentToken) {
+        // this is an in-place change that is translated to a
+        // saveToken on the other side
+        sendTokenOper(kMessage_saveToken, token: token)
+    }
+    func didMoveTokenFromIndex(store: TokenStore, origin: Int, destination: Int) {
+        let index = [origin, destination]
+        let data = NSKeyedArchiver.archivedDataWithRootObject(index)
+        if #available(iOS 9.0, *) {
+            simpleSendData(kMessage_moveToken, data: data)
+        }
+    }
+    func didDeletePersistentToken(store: TokenStore, token:PersistentToken) {
+        sendTokenOper(kMessage_deletePersistentToken, token: token)
+    }
+
 }

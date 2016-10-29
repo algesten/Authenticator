@@ -28,7 +28,7 @@ import OneTimePassword
 
 struct WatchEntry : Component {
 
-    let persistentToken:PersistentToken
+    var persistentToken:PersistentToken
     
     enum Action {
         case Dismiss

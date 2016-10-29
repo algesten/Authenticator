@@ -23,6 +23,8 @@
 		5B5917D71DC1187100043DD5 /* WatchTokenRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5917D61DC1187100043DD5 /* WatchTokenRowModel.swift */; };
 		5B7A0AD21DC3987C0077E9E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7A0AD11DC3987C0077E9E9 /* CoreGraphics.framework */; };
 		5B7A0AD31DC39AAF0077E9E9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93AD15119CD51BE007480E9 /* Colors.swift */; };
+		5B9977C11DC4CEA800CB4716 /* TokenStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9977C01DC4CEA800CB4716 /* TokenStoreDelegate.swift */; };
+		5B9977C21DC4CEA800CB4716 /* TokenStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9977C01DC4CEA800CB4716 /* TokenStoreDelegate.swift */; };
 		5BA42BAF1DBD117900A42213 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EB448D1C52A74200ACFA87 /* Component.swift */; };
 		5BA42BB21DBD11CF00A42213 /* WatchTokenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */; };
 		5BA42BB41DBD135D00A42213 /* Base32.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C944A5581A7ECB3100E08B1E /* Base32.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -171,6 +173,7 @@
 		5B43444F1DBE95CA00D31302 /* WatchEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchEntryViewController.swift; sourceTree = "<group>"; };
 		5B5917D61DC1187100043DD5 /* WatchTokenRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenRowModel.swift; sourceTree = "<group>"; };
 		5B7A0AD11DC3987C0077E9E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		5B9977C01DC4CEA800CB4716 /* TokenStoreDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStoreDelegate.swift; sourceTree = "<group>"; };
 		5BA42BB11DBD11CF00A42213 /* WatchTokenList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenList.swift; sourceTree = "<group>"; };
 		5BA42BB91DBD4DC500A42213 /* WatchTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTokenStore.swift; sourceTree = "<group>"; };
 		5BA42BBB1DBD5AF300A42213 /* WatchRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchRoot.swift; sourceTree = "<group>"; };
@@ -623,8 +626,9 @@
 			isa = PBXGroup;
 			children = (
 				C9F7A8601C4D90B50082E5AE /* TokenStore.swift */,
-				5BED7C451DC05EF7003C9176 /* WCSessionDelegate.swift */,
+				5B9977C01DC4CEA800CB4716 /* TokenStoreDelegate.swift */,
 				5BED7C471DC0620D003C9176 /* WCMessages.swift */,
+				5BED7C451DC05EF7003C9176 /* WCSessionDelegate.swift */,
 			);
 			name = "Data Store";
 			sourceTree = "<group>";
@@ -844,6 +848,7 @@
 				C9BA64EA1C0C4FBC00610C7C /* UITableView+ReusableCells.swift in Sources */,
 				CC46C4711DB3007D00EB4605 /* SearchField.swift in Sources */,
 				C9B7328F1C0A8AE60076F77E /* TokenListViewModel.swift in Sources */,
+				5B9977C11DC4CEA800CB4716 /* TokenStoreDelegate.swift in Sources */,
 				C99B85251BC9AB7100A6C75D /* BarButtonViewModel.swift in Sources */,
 				C9AAB0791B9113BF000CE547 /* TokenFormModels.swift in Sources */,
 				1D3623260D0F684500981E51 /* OTPAppDelegate.swift in Sources */,
@@ -879,6 +884,7 @@
 			files = (
 				5BA42BC21DBD5D4700A42213 /* WatchTokenListViewModel.swift in Sources */,
 				5BA42BBA1DBD4DC500A42213 /* WatchTokenStore.swift in Sources */,
+				5B9977C21DC4CEA800CB4716 /* TokenStoreDelegate.swift in Sources */,
 				5BA42BBF1DBD5BF400A42213 /* WatchRootViewModel.swift in Sources */,
 				5B7A0AD31DC39AAF0077E9E9 /* Colors.swift in Sources */,
 				5BA42BBC1DBD5AF300A42213 /* WatchRoot.swift in Sources */,

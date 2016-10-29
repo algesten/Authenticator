@@ -9,7 +9,10 @@
 import Foundation
 
 // request new tokens
-let kRequestTokensMessage = "OTPRequestTokensMessage"
+let kMessage_requestTokens = "OTPRequestTokensMessage"
 
-// transmit tokens
-let kTokensMessage = "OTPTokensMessage"
+let kMessage_addToken = "OTPAddToken"
+let kMessage_resetTokens = "OTPResetTokens"
+let kMessage_saveToken = "OTPSaveToken"
+let kMessage_moveToken = "OTPMoveToken"
+let kMessage_deletePersistentToken = "OTPDeletePersistentToken"

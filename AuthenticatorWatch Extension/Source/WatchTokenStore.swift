@@ -37,7 +37,7 @@ extension TokenStore {
     // watch app request tokens to be pushed from the
     // phone. done when we launch the app.
     func requestTokens() {
-        simpleSend(kRequestTokensMessage)
+        simpleSend(kMessage_requestTokens)
     }
     
     // invoked when we receive tokens from the phone,
@@ -79,7 +79,9 @@ extension TokenStore : WCSessionDelegate {
         session.activateSession()
     }
     
-    func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
+    func session(session: WCSession, activationDidCompleteWithState
+                 activationState: WCSessionActivationState,
+                 error: NSError?) {
         switch activationState {
         case .NotActivated:
             // not much we can don about that
@@ -118,7 +120,22 @@ extension TokenStore : WCSessionDelegate {
     func simpleSend(name:String) {
         session?.sendMessage(["name":name], replyHandler: nil, errorHandler: nil)
     }
- 
+
+    private func decodeToken(data:NSData) -> Token {
+        let url = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSURL
+        return Token(url: url)!
+    }
+
+    // helper to get corresponding local token for one that's been received in a message.
+    private func persistentTokenFor(token:Token) -> PersistentToken? {
+        for t in persistentTokens {
+            if t.token.generator.secret == token.generator.secret {
+                return t
+            }
+        }
+        return nil
+    }
+
     // messages are on the form:
     // [
     //    name: "OTPPersistentTokensMessage"   // name of message
@@ -126,12 +143,75 @@ extension TokenStore : WCSessionDelegate {
     // ]
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         let name = message["name"] as! String;
-        switch name {
-        case kTokensMessage:
-            receivePersistentTokensMessage(message["data"] as! NSData)
-        default:
-            print("Received message with unknown name ", name)
+        let data = message["data"] as! NSData
+        do {
+            switch name {
+            case kMessage_addToken:
+                try addToken(decodeToken(data))
+            case kMessage_resetTokens:
+                let arr = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [NSURL]
+                let tokens = arr.map() { Token(url: $0)! }
+                try resetTokens(tokens)
+            case kMessage_saveToken:
+                let token = decodeToken(data)
+                guard let localToken = persistentTokenFor(token) else {
+                    print("Found no corresponding local token")
+                    return
+                }
+                try saveToken(token, toPersistentToken: localToken)
+            case kMessage_moveToken:
+                let index = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [Int]
+                moveTokenFromIndex(index[0], toIndex: index[1])
+            case kMessage_deletePersistentToken:
+                let token = decodeToken(data)
+                guard let localToken = persistentTokenFor(token) else {
+                    print("Found no corresponding local token")
+                    return
+                }
+                try deletePersistentToken(localToken)
+            default:
+                print("Received message with unknown name ", name)
+            }
+        } catch {
+
         }
+    }
+
+}
+
+
+// MARK: - Delegate
+class WatchTokenStoreDelegate : TokenStoreDelegate {
+
+    private let store:TokenStore
+    private let dispatchAction:(WatchRoot.Action) -> ()
+
+    init(store:TokenStore, dispatchAction:(WatchRoot.Action) -> ()) {
+        self.store = store
+        self.dispatchAction = dispatchAction
+    }
+
+    private func dispatchUpdate() {
+        dispatchAction(.TokenStoreUpdated(store.persistentTokens))
+    }
+
+    func didAddToken(store: TokenStore, token: PersistentToken) {
+        dispatchUpdate()
+    }
+    func didResetTokens(store: TokenStore, tokens:[PersistentToken]) {
+        dispatchUpdate()
+    }
+    func didSaveToken(store: TokenStore, token: PersistentToken) {
+        dispatchUpdate()
+    }
+    func didUpdatePersistenToken(store: TokenStore, token:PersistentToken) {
+        dispatchUpdate()
+    }
+    func didMoveTokenFromIndex(store: TokenStore, origin: Int, destination: Int) {
+        dispatchUpdate()
+    }
+    func didDeletePersistentToken(store: TokenStore, token:PersistentToken) {
+        dispatchUpdate()
     }
 
 }

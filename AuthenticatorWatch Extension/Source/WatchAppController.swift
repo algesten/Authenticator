@@ -52,14 +52,10 @@ class WatchAppController {
             fatalError("Failed to load token store: \(error)")
         }
         component = WatchRoot(persistentTokens: store.persistentTokens)
-        
-        // store changes trigger refresh of everything
-        store.onChangeCallback = { [weak self] in
-            if let tokens = self?.store.persistentTokens {
-                self?.handleAction(.TokenStoreUpdated(tokens))
-            }
-        }
-        
+
+        // delegate store updates to dispathing UI Actions
+        store.delegate = WatchTokenStoreDelegate(store: store, dispatchAction: handleAction)
+
     }
 
     func activateWCSession() {

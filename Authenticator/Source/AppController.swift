@@ -58,15 +58,8 @@ class AppController {
 
         // store changes sends an update to a potentially connected watch app
         if #available(iOS 9.0, *) {
-            store.onChangeCallback = { [weak self] in
-                do {
-                    try self?.store.sendTokens()
-                } catch {
-                    // this isn't much of a problem, because we don't
-                    // really care whether the watch receives anything
-                    print("sendTokens failed \(error)")
-                }
-            }
+            // by being a delegate operations are propagated to the watch.
+            store.delegate = store
         }
     }
     

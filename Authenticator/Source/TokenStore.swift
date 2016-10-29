@@ -30,7 +30,7 @@ class TokenStore : NSObject {
     private let keychain: Keychain
     private let userDefaults: NSUserDefaults
     private(set) var persistentTokens: [PersistentToken]
-    var onChangeCallback:(() -> ())?
+    var delegate: TokenStoreDelegate?
 
     // Throws an error if the initial state could not be loaded from the keychain.
     init(keychain: Keychain, userDefaults: NSUserDefaults) throws {
@@ -75,17 +75,20 @@ extension TokenStore {
         let newPersistentToken = try keychain.addToken(token)
         persistentTokens.append(newPersistentToken)
         saveTokenOrder()
-        onChangeCallback?()
+        delegate?.didAddToken(self, token: newPersistentToken)
     }
     
     func resetTokens(tokens:[Token]) throws -> [PersistentToken] {
         persistentTokens = try keychain.resetTokens(tokens)
         saveTokenOrder()
-        onChangeCallback?()
+        delegate?.didResetTokens(self, tokens: persistentTokens)
         return persistentTokens
     }
 
-    func saveToken(token: Token, toPersistentToken persistentToken: PersistentToken) throws {
+    // the "official" API call triggers delegate, while used from 
+    // updatePersistentToken doesn't
+    private func doSaveToken(token: Token, toPersistentToken persistentToken: PersistentToken,
+                             triggerDelegate:Bool) throws {
         let updatedPersistentToken = try keychain.updatePersistentToken(persistentToken,
                                                                         withToken: token)
         // Update the in-memory token, which is still the origin of the table view's data
@@ -95,13 +98,19 @@ extension TokenStore {
             }
             return $0
         }
-        onChangeCallback?()
+        if (triggerDelegate) {
+            delegate?.didSaveToken(self, token: updatedPersistentToken)
+        }
+    }
+
+    func saveToken(token: Token, toPersistentToken persistentToken: PersistentToken) throws {
+        try doSaveToken(token, toPersistentToken: persistentToken, triggerDelegate: true)
     }
 
     func updatePersistentToken(persistentToken: PersistentToken) throws {
         let newToken = persistentToken.token.updatedToken()
-        try saveToken(newToken, toPersistentToken: persistentToken)
-        onChangeCallback?()
+        try doSaveToken(newToken, toPersistentToken: persistentToken, triggerDelegate: false)
+        delegate?.didUpdatePersistenToken(self, token: persistentToken)
     }
 
     func moveTokenFromIndex(origin: Int, toIndex destination: Int) {
@@ -109,7 +118,7 @@ extension TokenStore {
         persistentTokens.removeAtIndex(origin)
         persistentTokens.insert(persistentToken, atIndex: destination)
         saveTokenOrder()
-        onChangeCallback?()
+        delegate?.didMoveTokenFromIndex(self, origin: origin, destination: destination)
     }
 
     func deletePersistentToken(persistentToken: PersistentToken) throws {
@@ -118,7 +127,7 @@ extension TokenStore {
             persistentTokens.removeAtIndex(index)
         }
         saveTokenOrder()
-        onChangeCallback?()
+        delegate?.didDeletePersistentToken(self, token: persistentToken)
     }
 }
 
