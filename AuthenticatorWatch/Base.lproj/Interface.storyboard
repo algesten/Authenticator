@@ -16,13 +16,13 @@
                         <table alignment="left" id="hTl-CQ-0l8">
                             <items>
                                 <tableRow identifier="TokenCell" id="nsI-Xk-y4W" customClass="WatchTokenListRowController" customModule="AuthenticatorWatch_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="UZy-lD-c62">
+                                    <group key="rootItem" width="1" height="40" alignment="left" layout="vertical" spacing="0.0" id="UZy-lD-c62">
                                         <items>
                                             <label alignment="left" text="Github" minimumScaleFactor="0.80000000000000004" id="h6a-Eo-uxG">
                                                 <color key="textColor" red="0.66666666666666663" green="0.6588235294117647" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="font" type="system" weight="light" pointSize="14"/>
                                             </label>
-                                            <label alignment="left" text="martin@algesten.se" minimumScaleFactor="0.80000000000000004" id="s3b-HD-0fv">
+                                            <label alignment="left" verticalAlignment="bottom" text="martin@algesten.se" minimumScaleFactor="0.80000000000000004" id="s3b-HD-0fv">
                                                 <color key="textColor" red="0.98039215686274506" green="0.97254901960784312" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="font" type="system" weight="ultraLight" pointSize="14"/>
                                             </label>
@@ -79,7 +79,7 @@
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
                             </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="20"/>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="26"/>
                         </group>
                     </items>
                     <connections>

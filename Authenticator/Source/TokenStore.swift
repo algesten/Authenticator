@@ -78,10 +78,11 @@ extension TokenStore {
         onChangeCallback?()
     }
     
-    func resetTokens(tokens:[Token]) throws {
-        try keychain.resetTokens(tokens)
+    func resetTokens(tokens:[Token]) throws -> [PersistentToken] {
+        persistentTokens = try keychain.resetTokens(tokens)
         saveTokenOrder()
         onChangeCallback?()
+        return persistentTokens
     }
 
     func saveToken(token: Token, toPersistentToken persistentToken: PersistentToken) throws {

@@ -75,7 +75,6 @@ extension WatchRoot {
     }
     
     enum Effect {
-        case RefreshTokenList([PersistentToken])
     }
     
     @warn_unused_result
@@ -86,7 +85,9 @@ extension WatchRoot {
         case .EntryAction(let action):
             return handleWatchEntryAction(action)
         case .TokenStoreUpdated(let tokens):
-            return .RefreshTokenList(tokens)
+            _ = update(.TokenListAction(.TokenStoreUpdated(tokens)))
+            _ = update(.EntryAction(.TokenStoreUpdated(tokens)))
+            return nil
         }
     }
     

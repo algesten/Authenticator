@@ -30,12 +30,9 @@ struct WatchEntry : Component {
 
     let persistentToken:PersistentToken
     
-    var viewModel: WatchEntryViewModel {
-        return WatchEntryViewModel(persistentToken:persistentToken)
-    }
-    
     enum Action {
         case Dismiss
+        case TokenStoreUpdated([PersistentToken])
     }
     enum Effect {
         case HideModal
@@ -46,8 +43,28 @@ struct WatchEntry : Component {
         switch action {
         case .Dismiss:
             return .HideModal
+        case .TokenStoreUpdated(let tokens):
+            tokens.forEach() {
+                // if the secrets match, we update
+                if persistentToken.token.generator.secret == $0.token.generator.secret {
+                    persistentToken = $0
+                }
+            }
+            return nil
         }
     }
     
+}
+
+
+// MARK: - View
+
+extension WatchEntry {
+    
+    typealias ViewModel = WatchEntryViewModel
+    
+    var viewModel: ViewModel {
+        return WatchEntryViewModel(persistentToken:persistentToken)
+    }
     
 }

@@ -15,7 +15,6 @@ import WatchConnectivity
 extension TokenStore : WCSessionDelegate {
 
     func activateWCSession() {
-        print("activate")
         guard WCSession.isSupported() else {
             return
         }
@@ -29,7 +28,6 @@ extension TokenStore : WCSessionDelegate {
     // empty placeholders to fulfill the protocol.
     @available(iOS 9.3, *)
     func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
-        print("activationDidComplete")
     }
     func sessionDidBecomeInactive(session: WCSession) {
     }
@@ -37,7 +35,6 @@ extension TokenStore : WCSessionDelegate {
     }
     
     private var session:WCSession? {
-        print("session")
         // is the framework available at all?
         guard WCSession.isSupported() else {
             return nil
@@ -53,7 +50,6 @@ extension TokenStore : WCSessionDelegate {
     }
     
     func sendTokens() throws {
-        print("sendTokens")
         // we transport the tokens as [NSURL, NSURL, NSURL, ...]
         let urls = try persistentTokens.map() { try $0.token.toURL() }
         // converted to NSData
@@ -72,7 +68,6 @@ extension TokenStore : WCSessionDelegate {
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         let name = message["name"] as! String;
-        print("didReceive \(name)")
         switch name {
         case kRequestTokensMessage:
             // watch wants tokens

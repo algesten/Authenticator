@@ -34,20 +34,9 @@ struct WatchTokenList : Component {
         self.persistentTokens = persistentTokens
     }
     
-    var viewModel: WatchTokenListViewModel {
-        let rowModels = persistentTokens.map({
-            WatchTokenRowModel(persistentToken: $0)
-        })
-        func selectRowAction(index:Int) -> WatchTokenList.Action {
-            let selected = persistentTokens[index]
-            return .SelectToken(selected)
-        }
-        return WatchTokenListViewModel(rowModels: rowModels, selectRowAction: selectRowAction)
-    }
-    
     enum Action {
         case SelectToken(PersistentToken)
-        case TokenListUpdate([PersistentToken])
+        case TokenStoreUpdated([PersistentToken])
     }
     enum Effect {
         case BeginShowEntry(PersistentToken)
@@ -58,7 +47,7 @@ struct WatchTokenList : Component {
         switch action {
         case .SelectToken(let token):
             return .BeginShowEntry(token)
-        case .TokenListUpdate(let tokens):
+        case .TokenStoreUpdated(let tokens):
             self.persistentTokens = tokens
             return nil
         }
@@ -66,5 +55,23 @@ struct WatchTokenList : Component {
     
 }
 
+// MARK: - View
+
+extension WatchTokenList {
+    
+    typealias ViewModel = WatchTokenListViewModel
+
+    var viewModel: ViewModel {
+        let rowModels = persistentTokens.map({
+            WatchTokenRowModel(persistentToken: $0)
+        })
+        func selectRowAction(index:Int) -> WatchTokenList.Action {
+            let selected = persistentTokens[index]
+            return .SelectToken(selected)
+        }
+        return WatchTokenListViewModel(rowModels: rowModels, selectRowAction: selectRowAction)
+    }
+    
+}
 
 

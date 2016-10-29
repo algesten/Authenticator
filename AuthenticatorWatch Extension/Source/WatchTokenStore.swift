@@ -47,7 +47,7 @@ extension TokenStore {
         let arr = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [NSURL]
         let tokens = arr.map() { Token(url: $0)! }
 
-        // XXX remove me. Since we hijacked persistence in OneTimePassword, 
+        // XXX remove me. Since we hijacked persistence in OneTimePassword,
         // we get test tokens both in app and phone simulator
         //onChangeCallback?()
         //return

@@ -44,7 +44,7 @@ class WatchEntryViewController: WKInterfaceController {
     // timer if we have time based view
     var timer:NSTimer?
     
-    var onDidDeactivate:(() -> ())?
+    var onWillDisappear:(() -> ())?
     
     override func awakeWithContext(context: AnyObject?) {
 
@@ -62,12 +62,12 @@ class WatchEntryViewController: WKInterfaceController {
 
     }
     
-    override func didDeactivate() {
-        super.didDeactivate()
+    override func willDisappear() {
+        super.willDisappear()
         WatchEntryViewController.instance = nil
         timer?.invalidate()
         timer = nil
-        onDidDeactivate?()
+        onWillDisappear?()
     }
 
 }
@@ -84,7 +84,7 @@ extension WatchEntryViewController {
         issuerLabel.setText(viewModel.issuer)
         nameLabel.setText(viewModel.name)
         passwordLabel.setText(viewModel.password)
-        onDidDeactivate = {
+        onWillDisappear = {
             dispatchAction(.Dismiss)
         }
         

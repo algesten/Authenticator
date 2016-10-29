@@ -74,10 +74,6 @@ class WatchAppController {
     }
     
     private func handleEffect(effect: WatchRoot.Effect) {
-        switch effect {
-        case .RefreshTokenList(let tokens):
-            handleAction(.TokenListAction(.TokenListUpdate(tokens)))
-        }
     }
     
 
