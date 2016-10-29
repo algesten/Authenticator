@@ -40,7 +40,10 @@ class WatchEntryViewController: WKInterfaceController {
     @IBOutlet weak var nameLabel: WKInterfaceLabel!
     @IBOutlet weak var progressGroup: WKInterfaceGroup!
     @IBOutlet weak var passwordLabel: WKInterfaceLabel!
-    
+
+    @IBOutlet weak var nohotpGroup: WKInterfaceGroup!
+    @IBOutlet weak var passwordGroup: WKInterfaceGroup!
+
     // timer if we have time based view
     var timer:NSTimer?
     
@@ -80,6 +83,16 @@ extension WatchEntryViewController {
         // stop a (very not likely) previous timer
         timer?.invalidate()
         timer = nil
+        
+        if viewModel.isHOTP {
+            // XXX remove when we support HOTP
+            nohotpGroup.setHidden(false)
+            passwordGroup.setHidden(true)
+            return
+        } else {
+            nohotpGroup.setHidden(true)
+            passwordGroup.setHidden(false)
+        }
         
         issuerLabel.setText(viewModel.issuer)
         nameLabel.setText(viewModel.name)

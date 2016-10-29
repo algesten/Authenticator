@@ -55,7 +55,15 @@
                         </group>
                         <group width="1" alignment="left" verticalAlignment="center" layout="vertical" spacing="0.0" id="mUf-yq-MU1" userLabel="Vertical Center">
                             <items>
-                                <group width="1" alignment="left" layout="vertical" id="rUj-Tv-K6U">
+                                <group width="1" alignment="left" hidden="YES" layout="vertical" id="JKa-26-Tee" userLabel="nohotp">
+                                    <items>
+                                        <label width="1" alignment="left" text="No HOTP" textAlignment="center" id="wAw-5N-kny">
+                                            <color key="textColor" red="0.55294117649999996" green="0.55294117649999996" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label alignment="left" text="Authenticator Watch App does not support counter based tokens (yet)." textAlignment="left" numberOfLines="6" id="l3r-d4-vAn"/>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" layout="vertical" id="rUj-Tv-K6U" userLabel="password">
                                     <items>
                                         <label width="1" alignment="left" text="Github" textAlignment="center" id="ZnM-9o-McT">
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,6 +93,8 @@
                     <connections>
                         <outlet property="issuerLabel" destination="ZnM-9o-McT" id="nYr-Es-FcI"/>
                         <outlet property="nameLabel" destination="0PW-Qr-Cb4" id="NIs-Df-Jq7"/>
+                        <outlet property="nohotpGroup" destination="JKa-26-Tee" id="XGu-6L-zGw"/>
+                        <outlet property="passwordGroup" destination="rUj-Tv-K6U" id="sQM-cw-Shf"/>
                         <outlet property="passwordLabel" destination="KmY-e8-FGP" id="fNG-Bw-FuD"/>
                         <outlet property="progressGroup" destination="vdJ-3i-a3v" id="B2M-aA-4cm"/>
                     </connections>
