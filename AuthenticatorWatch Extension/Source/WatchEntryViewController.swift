@@ -55,6 +55,9 @@ class WatchEntryViewController: WKInterfaceController {
         timer = nil
     }
 
+    // XXX remove when watch os 3
+    var lastViewModel: WatchEntry.ViewModel?
+
     var onWillDisappear:(() -> ())?
 
     override func awakeWithContext(context: AnyObject?) {
@@ -97,6 +100,9 @@ extension WatchEntryViewController {
     func updateWithViewModel(viewModel: WatchEntry.ViewModel,
                              dispatchAction: (WatchEntry.Action) -> ()) {
 
+        // XXX remove in watch os 3
+        lastViewModel = viewModel
+
         // stop a (very not likely) previous timer
         stopTimer()
 
@@ -124,22 +130,43 @@ extension WatchEntryViewController {
         } else {
             progressGroup.setHidden(false)
             startTimer = { [weak self] in
-                // in case we get repeated startTimer calls
-                self?.stopTimer()
-                // start a timer that repeatedly will update the progress
-                self?.timer = NSTimer.scheduledTimerWithTimeInterval(0.05, repeats: true) { _ in
-                    guard let progress = viewModel.progress else {
-                        return
-                    }
-                    self?.passwordLabel.setText(viewModel.password)
-                    self?.drawProgress(progress)
+                guard let _self = self else {
+                    return
                 }
+                // in case we get repeated startTimer calls
+                _self.stopTimer()
+                // start a timer that repeatedly will update the progress
+                _self.timer = NSTimer.scheduledTimerWithTimeInterval(
+                    0.02, target: _self, selector:
+                    #selector(WatchEntryViewController.tick(_:)),
+                    userInfo: nil, repeats: true
+                )
+// XXX bring this back in watch os 3
+//                self?.timer = NSTimer.scheduledTimerWithTimeInterval(0.05, repeats: true) { _ in
+//                    guard let progress = viewModel.progress else {
+//                        return
+//                    }
+//                    self?.passwordLabel.setText(viewModel.password)
+//                    self?.drawProgress(progress)
+//                }
             }
         }
 
         startTimer()
 
     }
+
+    func tick(timer: NSTimer) {
+        guard let progress = lastViewModel?.progress else {
+            return
+        }
+        guard let password = lastViewModel?.password else {
+            return
+        }
+        passwordLabel.setText(password)
+        drawProgress(progress)
+    }
+
     func updateProgress(viewModel: WatchEntry.ViewModel) {
     }
 }

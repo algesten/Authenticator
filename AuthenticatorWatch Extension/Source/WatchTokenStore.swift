@@ -50,6 +50,9 @@ extension TokenStore {
         }
         let tokens = arr.map() { Token(url: $0)! }
 
+        //onChangeCallback?()
+        //return
+
         do {
             try resetTokens(tokens)
         } catch {
